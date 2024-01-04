@@ -145,7 +145,7 @@ const Expertise = () => {
               "mr-2",
               current !== 0
                 ? "[&>.clipped]:hover:[clip-path:circle(100%)]"
-                : "[&>.icon>*]:stroke-dark-primary/10"
+                : "[&>.icon>*]:stroke-dark-primary/10 [&>.clipped]:[clip-path:circle(0%)]"
             )}
             onClick={() => updateCurrent(false)}
           >
@@ -159,7 +159,7 @@ const Expertise = () => {
               "w-8 h-8 lg:w-10 lg:h-10 cursor-pointer rounded-full relative overflow-hidden flex items-center justify-center p-1",
               current !== data.length - 1
                 ? "[&>.clipped]:hover:[clip-path:circle(100%)]"
-                : "[&>.icon>*]:stroke-dark-primary/10"
+                : "[&>.icon>*]:stroke-dark-primary/10 [&>.clipped]:[clip-path:circle(0%)]"
             )}
             onClick={() => updateCurrent(true)}
           >

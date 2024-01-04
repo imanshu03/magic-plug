@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from "react";
 import gsap, { Power4 } from "gsap";
 
 import { SectionHeading } from "@/Components/Heading";
-import StarIcon from "@/Icons/Star";
 import { SERVICES_DATA } from "@/data";
 import { useAnimation } from "@/hooks";
 
@@ -56,7 +55,7 @@ const Services = () => {
 
   return (
     <section
-      className="w-screen h-auto md:h-[300vh] font-manrope relative"
+      className="w-screen h-auto md:h-[400vh] font-manrope relative"
       id="services"
       ref={parentRef}
     >
