@@ -21,9 +21,6 @@ const TextArea = forwardRef<
         className
       )}
     >
-      <label htmlFor={props.id} className="hidden">
-        {props.name}
-      </label>
       <textarea
         className={clsx(
           "relative z-[1] bg-transparent [&~span]:focus:hidden text-left w-full h-full min-h-[48px]",
@@ -31,6 +28,7 @@ const TextArea = forwardRef<
         )}
         {...props}
         ref={ref}
+        aria-label={props.id}
       ></textarea>
       {placeholder && !props.value ? (
         <span

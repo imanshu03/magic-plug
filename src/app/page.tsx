@@ -6,8 +6,10 @@ import Divider from "@/Components/Divider";
 import Services from "@/Sections/Services";
 import Contact from "@/Sections/Contact";
 import Carousel from "@/Sections/Carousel";
+import { useEffect } from "react";
 
 export default function Home() {
+
   return (
     <main className="w-screen h-auto">
       <Intro />

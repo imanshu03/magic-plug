@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { Hurricane, Manrope } from "next/font/google";
 import "./globals.css";
-import RouteTransition from "./RouteTransition";
 import path from "path";
 import fs from "fs";
 import clsx from "clsx";
 import Script from "next/script";
+import SmoothScrollWrapper from "../Components/SmoothScrollWrapper";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -159,7 +159,7 @@ export default function RootLayout({
           "bg-app-bg w-screen h-auto"
         )}
       >
-        <RouteTransition>{children}</RouteTransition>
+        <SmoothScrollWrapper>{children}</SmoothScrollWrapper>
       </body>
     </html>
   );

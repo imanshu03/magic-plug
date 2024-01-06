@@ -4,6 +4,7 @@ import gsap, { Power4 } from "gsap";
 import { SectionHeading } from "@/Components/Heading";
 import { SERVICES_DATA } from "@/data";
 import { useAnimation } from "@/hooks";
+import clsx from "clsx";
 
 const Services = () => {
   const parentRef = useRef<HTMLDivElement>(null);
@@ -20,7 +21,7 @@ const Services = () => {
         start: "top top",
         end: "bottom bottom",
         scrub: 0.7,
-        markers: true,
+        markers: false,
       },
     });
 
@@ -59,14 +60,21 @@ const Services = () => {
       id="services"
       ref={parentRef}
     >
-      <div className="w-full h-auto min-h-screen md:h-screen flex flex-col items-center justify-center sticky top-0 left-0 px-[5vw] lg:px-[10vw] overflow-hidden">
-        <SectionHeading heading="Our services" className="w-full items-center">
+      <div className="w-full h-auto min-h-screen md:h-screen flex flex-col items-center justify-center sticky top-0 left-0 overflow-hidden lg:px-[10vw]">
+        <SectionHeading
+          heading="Our services"
+          className="w-full items-center px-[5vw] md:px-0"
+        >
           From inception to implementation, in the realm of software solutions,
           consider it done - we&apos;ve got you covered.
         </SectionHeading>
         <div className="w-full mt-6 md:mt-10 lg:mt-16" ref={scrollParentRef}>
           <div
-            className="w-full flex flex-nowrap items-stretch justify-start overflow-x-auto md:overflow-visible scrollbar-hide snap-x snap-mandatory md:snap-none"
+            className={clsx(
+              "w-full flex flex-nowrap items-stretch justify-start overflow-x-auto md:overflow-visible",
+              "pl-[5vw] md:pl-0 scrollbar-hide scroll-px-[5vw] snap-x snap-mandatory md:scroll-px-0 md:snap-none",
+              "[&>*:nth-last-child(1)]:mr-[5vw] md:[&>*:nth-last-child(1)]:mr-0"
+            )}
             ref={scrollerRef}
           >
             {SERVICES_DATA.map((item, i) => (

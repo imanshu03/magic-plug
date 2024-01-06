@@ -1,12 +1,9 @@
 import React from "react";
 import Image from "next/image";
-import CustomLink from "@/Components/CustomLink";
-import { useRouteSlider } from "@/app/RouteTransition";
+import { CustomLink, NextLink } from "@/Components/Links";
 import Divider from "@/Components/Divider";
-import StarIcon from "@/Icons/Star";
 
 const Footer = () => {
-  const { handleRouteChange } = useRouteSlider();
   return (
     <>
       <Divider margin />
@@ -15,10 +12,11 @@ const Footer = () => {
           <div className="flex items-center justify-start grow mb-8 md:mb-0">
             <Image
               src="/assets/image/logo.png"
-              alt="magicplug"
+              alt="magicplug logo"
               width={276}
               height={276}
               className="w-8 h-8 md:h-10 md:w-10 inline-block"
+              priority
             />
 
             <p className="font-bold text-2xl md:text-3xl">
@@ -28,21 +26,19 @@ const Footer = () => {
           <div className="flex items-start justify-start">
             <div className="flex flex-col items-start justify-start font-medium">
               <p>follow us:</p>
-              <CustomLink className="mt-2">linkedin</CustomLink>
+              <CustomLink className="my-4 md:my-2">linkedin</CustomLink>
               <CustomLink>X(twitter)</CustomLink>
             </div>
             <div className="flex flex-col items-start justify-start font-medium mx-6 sm:mx-8 md:mx-10 lg:mx-14 xl:mx-16">
               <p>Contact us:</p>
-              <CustomLink className="mt-2">email</CustomLink>
+              <CustomLink className="my-4 md:my-2">email</CustomLink>
               <CustomLink>whatsapp</CustomLink>
             </div>
             <div className="flex flex-col items-start justify-start font-medium">
-              <CustomLink onClick={() => handleRouteChange("/")}>
-                home
-              </CustomLink>
-              <CustomLink onClick={() => handleRouteChange("/contact-us")}>
+              <NextLink href="/">home</NextLink>
+              <NextLink href="/contact-us" className="mt-4 md:mt-2">
                 contact us
-              </CustomLink>
+              </NextLink>
             </div>
           </div>
         </div>

@@ -86,16 +86,16 @@ const About = () => {
   return (
     <section className="bg-app-bg font-manrope w-screen px-[5vw] lg:px-[10vw]">
       <div
-        className="h-screen md:h-[200vh] w-full box-border relative"
+        className="h-auto md:h-[200vh] w-full box-border relative"
         ref={scrollerRef}
       >
-        <div className="h-screen w-full sticky top-0 left-0 flex flex-col items-center justify-center">
+        <div className="h-auto pb-[30vh] md:pb-0 md:h-screen w-full sticky top-0 left-0 flex flex-col items-center justify-center">
           <div className="block md:hidden h-auto">
-            <p className={clsx("text-dark-primary", commonTextClass)}>
+            <h1 className={clsx("text-dark-primary", commonTextClass)}>
               {logo}&nbsp;{text1.split(" ").slice(1).join(" ")}
-            </p>
+            </h1>
           </div>
-          <div
+          <h1
             className={clsx(
               "hidden md:block w-full h-auto text-dark-primary/10 relative",
               commonTextClass
@@ -121,7 +121,7 @@ const About = () => {
                 </Fragment>
               ))}
             </div>
-          </div>
+          </h1>
         </div>
       </div>
       <div className="w-full h-auto md:h-[max(50vh,500px)] flex flex-col md:flex-row items-stretch justify-between flex-nowrap bg-theme rounded-xl box-border overflow-hidden shadow-md">

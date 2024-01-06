@@ -1,18 +1,17 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { useRouteSlider } from "@/app/RouteTransition";
 import clsx from "clsx";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
-import SideArrowIcon from "@/Icons/SideArrow";
-import CustomLink from "./CustomLink";
+import { NextLink } from "./Links";
+import Link from "next/link";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
 const Header = () => {
-  const { handleRouteChange } = useRouteSlider();
   const [hide, setHide] = useState(false);
   const [currentTime, setCurrentTime] = useState(Date.now());
 
@@ -68,30 +67,31 @@ const Header = () => {
         hide ? "-translate-y-[100%]" : ""
       )}
     >
-      <div
+      <Link
         className="mr-auto flex items-center justify-start cursor-pointer"
-        onClick={() => handleRouteChange("/")}
+        href="/"
       >
         <Image
           src="/assets/image/logo.png"
-          alt="magicplug"
+          alt="magicplug logo"
           width={276}
           height={276}
           className="w-6 h-6 inline-block"
+          priority
         />
         <span className="ml-1 font-bold hidden md:inline-block">
           Magic<span className="font-medium">Plug</span>
         </span>
-      </div>
+      </Link>
       <p className="font-medium text-dark-primary mr-4 md:mr-8 lg:mr-12 xl:mr-24 text-xs sm:text-sm md:text-base">
         India,&nbsp;{getFormattedTime()}
       </p>
-      <CustomLink
+      <NextLink
         className="text-dark-primary font-medium relative overflow-hidden"
-        onClick={() => handleRouteChange("/contact-us")}
+        href="/contact-us"
       >
         Contact Us&nbsp;
-      </CustomLink>
+      </NextLink>
     </header>
   );
 };

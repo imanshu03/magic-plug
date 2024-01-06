@@ -21,9 +21,6 @@ const Input = forwardRef<
         className
       )}
     >
-      <label htmlFor={props.id} className="hidden">
-        {props.name}
-      </label>
       <input
         className={clsx(
           "relative z-[1] bg-transparent [&~span]:focus:hidden text-center w-full",
@@ -31,6 +28,7 @@ const Input = forwardRef<
         )}
         {...props}
         ref={ref}
+        aria-label={props.id}
       />
       {placeholder && !props.value ? (
         <span

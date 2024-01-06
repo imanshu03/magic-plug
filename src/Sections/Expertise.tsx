@@ -148,6 +148,7 @@ const Expertise = () => {
                 : "[&>.icon>*]:stroke-dark-primary/10 [&>.clipped]:[clip-path:circle(0%)]"
             )}
             onClick={() => updateCurrent(false)}
+            aria-label="previous expertise"
           >
             <ArrowIcon className="icon md:[&>*]:stroke-dark-secondary w-full h-full transition-colors duration-500 relative z-[1]" />
             <div className="clipped absolute w-full h-full top-0 left-0 p-1 bg-theme z-[2] [clip-path:circle(100%)] md:[clip-path:circle(0%)] transition-none md:transition-all md:duration-500">
@@ -162,6 +163,7 @@ const Expertise = () => {
                 : "[&>.icon>*]:stroke-dark-primary/10 [&>.clipped]:[clip-path:circle(0%)]"
             )}
             onClick={() => updateCurrent(true)}
+            aria-label="next expertise"
           >
             <ArrowIcon className="icon [&>*]:stroke-dark-secondary w-full h-full rotate-180 relative z-[1]" />
             <div className="clipped absolute w-full h-full top-0 left-0 p-1 bg-theme z-[2] [clip-path:circle(100%)] md:[clip-path:circle(0%)] transition-none md:transition-all md:duration-500">

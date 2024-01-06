@@ -1,6 +1,4 @@
-import Divider from "@/Components/Divider";
 import Contact from "@/Sections/Contact";
-import Footer from "@/Sections/Footer";
 import React from "react";
 
 const ContactUs = () => {
