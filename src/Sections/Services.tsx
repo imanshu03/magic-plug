@@ -1,12 +1,17 @@
+"use client";
 import React, { useEffect, useRef } from "react";
 import gsap, { Power4 } from "gsap";
 
 import { SectionHeading } from "@/Components/Heading";
-import { SERVICES_DATA } from "@/data";
 import { useAnimation } from "@/hooks";
 import clsx from "clsx";
+import { ServiceCollection } from "@studio/types";
 
-const Services = () => {
+interface Props {
+  data: ServiceCollection;
+}
+
+const Services: React.FC<Props> = ({ data }) => {
   const parentRef = useRef<HTMLDivElement>(null);
   const scrollParentRef = useRef<HTMLDivElement>(null);
   const scrollerRef = useRef<HTMLDivElement>(null);
@@ -77,7 +82,7 @@ const Services = () => {
             )}
             ref={scrollerRef}
           >
-            {SERVICES_DATA.map((item, i) => (
+            {data.map((item, i) => (
               <div
                 className="flex flex-col items-start justify-start w-[320px] md:w-[500px] shrink-0 p-4 md:p-6 lg:p-8 bg-theme rounded-xl box-border mr-6 snap-start md:snap-align-none shadow-md"
                 key={i}
@@ -86,7 +91,7 @@ const Services = () => {
                   0{i + 1}
                 </div>
                 <p className="text-light-primary text-left capitalize font-semibold text-xl md:text-2xl lg:text-3xl leading-tight">
-                  {item.heading}
+                  {item.name}
                 </p>
                 <p className="text-light-primary text-left font-extralight text-base md:text-lg lg:text-xl mt-2 lg:mt-4 h-auto md:h-[200px]">
                   {item.description}

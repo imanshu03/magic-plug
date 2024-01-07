@@ -2,12 +2,17 @@ import React from "react";
 import Image from "next/image";
 import { CustomLink, NextLink } from "@/Components/Links";
 import Divider from "@/Components/Divider";
+import { useScroll } from "./SmoothScrollWrapper";
 
 const Footer = () => {
+  const lenis = useScroll();
+
+  const scrollToTop = () => lenis?.scrollTo(0);
+
   return (
     <>
       <Divider margin />
-      <footer className="w-screen h-auto bg-app-bg px-[5vw] lg:px-[10vw] pb-10 font-manrope text-sm md:text-base flex flex-col items-center justify-start">
+      <footer className="w-screen h-auto bg-app-bg px-[5vw] lg:px-[10vw] pb-10 font-manrope text-sm md:text-base flex flex-col items-center justify-start text-dark-primary">
         <div className="w-full flex flex-col md:flex-row items-center md:items-start justify-start">
           <div className="flex items-center justify-start grow mb-8 md:mb-0">
             <Image
@@ -20,7 +25,8 @@ const Footer = () => {
             />
 
             <p className="font-bold text-2xl md:text-3xl">
-              Magic<span className="font-medium">Plug</span>
+              <span className="text-theme">Magic</span>
+              <span className="font-medium">Plug</span>
             </p>
           </div>
           <div className="flex items-start justify-start">
@@ -35,8 +41,21 @@ const Footer = () => {
               <CustomLink>whatsapp</CustomLink>
             </div>
             <div className="flex flex-col items-start justify-start font-medium">
-              <NextLink href="/">home</NextLink>
-              <NextLink href="/contact-us" className="mt-4 md:mt-2">
+              <NextLink href="/" triggerCallbackOnSamePath={scrollToTop}>
+                home
+              </NextLink>
+              <NextLink
+                href="/how-we-work"
+                className="mt-4 md:mt-2"
+                triggerCallbackOnSamePath={scrollToTop}
+              >
+                how we work
+              </NextLink>
+              <NextLink
+                href="/contact-us"
+                className="mt-4 md:mt-2"
+                triggerCallbackOnSamePath={scrollToTop}
+              >
                 contact us
               </NextLink>
             </div>

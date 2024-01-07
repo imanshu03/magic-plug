@@ -1,4 +1,3 @@
-import Divider from "@/Components/Divider";
 import StarIcon from "@/Icons/Star";
 import React from "react";
 

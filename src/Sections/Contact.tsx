@@ -5,9 +5,10 @@ import Checkbox from "@/Components/Checkbox";
 import Input from "@/Components/Input";
 import Radio from "@/Components/Radio";
 import TextArea from "@/Components/TextArea";
-import { SERVICES_DATA } from "@/data";
 import { CustomLink } from "@/Components/Links";
 import ArrowIcon from "@/Icons/Arrow";
+import { ReferrerCollection, ServiceCollection } from "@studio/types";
+
 interface FormInputs {
   name: string;
   company: string;
@@ -17,15 +18,16 @@ interface FormInputs {
   project: string;
 }
 
-const REFERRAL_DATA = ["Linkedin", "Google Search", "Word of Mouth", "Others"];
+interface Props {
+  services: ServiceCollection;
+  referrers: ReferrerCollection;
+}
 
-const Contact = () => {
+const Contact: React.FC<Props> = ({ services, referrers }) => {
   const {
     register,
     handleSubmit,
     watch,
-    getValues,
-    setValue,
     formState: { errors },
   } = useForm<FormInputs>({
     defaultValues: {
@@ -82,13 +84,13 @@ const Contact = () => {
           <span className="shrink-0 mr-2 w-full md:w-auto">
             I found you through:
           </span>
-          {REFERRAL_DATA.map((item, idx) => (
+          {referrers.map(({ name }, idx) => (
             <Radio
-              label={item}
-              value={item}
+              label={name}
+              value={name}
               className="shrink-0"
               key={idx}
-              checked={watch("referral") === item}
+              checked={watch("referral") === name}
               {...register("referral", { required: true })}
               error={!!errors.referral}
             />
@@ -98,14 +100,14 @@ const Contact = () => {
           <span className="shrink-0 w-full md:w-auto">
             I&apos;m looking for help with:
           </span>
-          {SERVICES_DATA.map(({ heading }, idx) => (
+          {services.map(({ name }, idx) => (
             <Checkbox
-              label={heading}
-              value={heading}
+              label={name}
+              value={name}
               key={idx}
               className="shrink-0"
               id={`services.${idx}`}
-              checked={watch("services").includes(heading)}
+              checked={watch("services").includes(name)}
               {...register("services", { required: true })}
               error={!!errors.services}
             />

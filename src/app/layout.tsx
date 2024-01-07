@@ -6,6 +6,7 @@ import fs from "fs";
 import clsx from "clsx";
 import Script from "next/script";
 import SmoothScrollWrapper from "../Components/SmoothScrollWrapper";
+import { useSelectedLayoutSegment } from "next/navigation";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -160,6 +161,7 @@ export default function RootLayout({
         )}
       >
         <SmoothScrollWrapper>{children}</SmoothScrollWrapper>
+        <div id="menu-portal"></div>
       </body>
     </html>
   );

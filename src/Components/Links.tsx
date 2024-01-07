@@ -2,6 +2,7 @@ import Link from "next/link";
 import SideArrowIcon from "@/Icons/SideArrow";
 import clsx from "clsx";
 import React from "react";
+import { usePathname } from "next/navigation";
 
 const anchorClass = clsx(
   "overflow-hidden flex items-center justify-start cursor-pointer text-xs sm:text-sm md:text-base",
@@ -33,11 +34,29 @@ export const NextLink: React.FC<{
   href: string;
   className?: string;
   children: React.ReactNode;
-}> = ({ href, className = "", children }) => {
+  triggerCallbackOnSamePath?: () => void;
+  withArrow?: boolean;
+}> = ({
+  href,
+  className = "",
+  children,
+  triggerCallbackOnSamePath,
+  withArrow = true,
+}) => {
+  const location = usePathname();
+  const onSamePath = () => {
+    if (location === href) triggerCallbackOnSamePath?.();
+  };
+
   return (
-    <Link href={href} className={clsx(anchorClass, className)} prefetch>
+    <Link
+      href={href}
+      className={clsx(withArrow ? anchorClass : "", className)}
+      prefetch
+      onClick={onSamePath}
+    >
       {children}
-      {Arrows}
+      {withArrow ? Arrows : null}
     </Link>
   );
 };

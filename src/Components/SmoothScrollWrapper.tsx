@@ -2,28 +2,45 @@
 import Footer from "@/Components/Footer";
 import Header from "@/Components/Header";
 import Lenis from "@studio-freight/lenis";
-import React, { useEffect } from "react";
+import { useSelectedLayoutSegment } from "next/navigation";
+import React, { createContext, useContext, useEffect, useState } from "react";
+
+const ScrollContext = createContext<Lenis | null>(null);
+
+export const useScroll = () => useContext(ScrollContext);
 
 const SmoothScrollWrapper: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
+  const active = useSelectedLayoutSegment();
+  const [lenisScroll, setLenisScroll] = useState<Lenis | null>(null);
+
   useEffect(() => {
-    const lenis = new Lenis();
+    if (!active?.includes("studio")) {
+      const lenis = new Lenis();
 
-    function raf(time: number) {
-      lenis.raf(time);
+      function raf(time: number) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+
       requestAnimationFrame(raf);
+      setLenisScroll(lenis);
+      return () => {
+        setLenisScroll(null);
+        lenis.destroy();
+      };
     }
+  }, [active]);
 
-    requestAnimationFrame(raf);
-    return () => lenis.destroy();
-  }, []);
-  return (
-    <>
+  return active?.includes("studio") ? (
+    <>{children}</>
+  ) : (
+    <ScrollContext.Provider value={lenisScroll}>
       <Header />
       {children}
       <Footer />
-    </>
+    </ScrollContext.Provider>
   );
 };
 

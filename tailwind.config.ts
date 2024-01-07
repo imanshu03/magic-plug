@@ -14,51 +14,28 @@ const config: Config = {
       keyframes: {
         "slide-out": {
           "0%": {
-            transform: "translateY(0)",
+            opacity: "1",
+            transform: "scale(1)",
+            filter: "blur(0px)",
           },
           "100%": {
-            transform: "translateY(-100%)",
+            opacity: "0",
+            transform: "scale(1.1)",
+            filter: "blur(10px)",
           },
         },
         "slide-in": {
           "0%": {
-            transform: "translateY(-100%)",
+            "clip-path": "polygon(0% 0%,100% 0%,100% 0%,0% 0%)",
           },
           "100%": {
-            transform: "translateY(0)",
-          },
-        },
-        "cursor-down": {
-          "0%": {
-            top: "25%",
-            opacity: "1",
-          },
-          "50%": {
-            opacity: "1",
-          },
-          "80%": {
-            top: "70%",
-            opacity: "0",
-          },
-          "100%": {
-            top: "80%",
-            opacity: "0",
-          },
-        },
-        "scroll-horizontal": {
-          "0%": {
-            transform: "translateX(0px)",
-          },
-          "100%": {
-            transform: "translateX(-100%)",
+            "clip-path": "polygon(0% 0%,100% 0%,100% 100%,0% 100%)",
           },
         },
       },
       animation: {
-        "slide-in": "slide-in 750ms ease-out backwards",
-        "slide-out": "slide-out 750ms ease-out forwards",
-        "cursor-down": "cursor-down 1s ease-out infinite",
-        scroll: "scroll-horizontal 14s linear infinite backwards",
+        "slide-in": "slide-in 500ms ease-out forwards",
+        "slide-out": "slide-out 300ms ease-out forwards",
       },
       fontFamily: {
         manrope: "var(--font-manrope)",
