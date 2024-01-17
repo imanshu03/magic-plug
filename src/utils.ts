@@ -1,6 +1,8 @@
 import lottie from "lottie-web";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import resolveConfig from "tailwindcss/resolveConfig";
+import tailwindConfig from "../tailwind.config";
 
 type ScrollLottieArguments = {
   lottieTarget: HTMLElement;
@@ -53,4 +55,20 @@ export const ScrollLottie = (obj: ScrollLottieArguments) => {
     timeline,
     animation,
   };
+};
+
+export const getPrefixedNumber = (num: number) => {
+  const str = `${num}`;
+  switch (str.length) {
+    case 1:
+      return `0${num}`;
+    case 2:
+      return str;
+    default:
+      return "";
+  }
+};
+
+export const getTailwindConfig = () => {
+  return resolveConfig(tailwindConfig).theme;
 };

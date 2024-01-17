@@ -16,11 +16,11 @@ export const ColoredHeading: React.FC<{
 };
 
 export const SectionHeading: React.FC<{
-  children: React.ReactNode;
+  children?: React.ReactNode;
   className?: string;
   heading: string;
   textClassName?: string;
-}> = ({ children, className = "", heading, textClassName = "" }) => {
+}> = ({ children = null, className = "", heading, textClassName = "" }) => {
   return (
     <div
       className={clsx("flex flex-col items-center justify-center", className)}
@@ -31,14 +31,16 @@ export const SectionHeading: React.FC<{
           {heading}
         </h2>
       </div>
-      <h3
-        className={clsx(
-          "text-dark-primary font-semibold text-center text-xl sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl !leading-tight mt-4",
-          textClassName
-        )}
-      >
-        {children}
-      </h3>
+      {children ? (
+        <h3
+          className={clsx(
+            "text-dark-primary font-semibold text-center text-xl sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl !leading-tight mt-4",
+            textClassName
+          )}
+        >
+          {children}
+        </h3>
+      ) : null}
     </div>
   );
 };

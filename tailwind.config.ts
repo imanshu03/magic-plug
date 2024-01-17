@@ -3,10 +3,10 @@ import defaultTheme from "tailwindcss/defaultTheme";
 
 const config: Config = {
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/Components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/Sections/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/Icons/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/Atoms/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
@@ -32,10 +32,19 @@ const config: Config = {
             "clip-path": "polygon(0% 0%,100% 0%,100% 100%,0% 100%)",
           },
         },
+        "scroll-horizontal": {
+          "0%": {
+            transform: "translateX(0px)",
+          },
+          "100%": {
+            transform: "translateX(-100%)",
+          },
+        },
       },
       animation: {
         "slide-in": "slide-in 500ms ease-out forwards",
         "slide-out": "slide-out 300ms ease-out forwards",
+        scroll: "scroll-horizontal 14s linear infinite backwards",
       },
       fontFamily: {
         manrope: "var(--font-manrope)",
@@ -61,7 +70,10 @@ const config: Config = {
       },
     },
   },
-  plugins: [require("tailwind-scrollbar-hide")],
+  plugins: [
+    require("tailwind-scrollbar-hide"),
+    require("@tailwindcss/typography"),
+  ],
   future: {
     hoverOnlyWhenSupported: true,
   },

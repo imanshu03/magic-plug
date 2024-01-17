@@ -2,10 +2,11 @@
 import React, { useRef, useState } from "react";
 import clsx from "clsx";
 
-import { SectionHeading } from "@/Components/Heading";
+import { SectionHeading } from "@/Atoms/Heading";
 import ArrowIcon from "@/Icons/Arrow";
 import CustomSvg from "@/Components/CustomSvg";
 import { ExpertiseCollection } from "@studio/types";
+import { getPrefixedNumber } from "@/utils";
 
 interface Props {
   data: ExpertiseCollection;
@@ -51,7 +52,7 @@ const Expertise: React.FC<Props> = ({ data }) => {
 
   return (
     <section
-      className="w-screen min-h-screen h-auto md:h-screen flex flex-col md:flex-row items-center justify-center md:justify-start overflow-hidden font-manrope px-[5vw] lg:px-[10vw]"
+      className="w-screen min-h-screen h-auto md:h-screen flex flex-col md:flex-row items-center justify-center md:justify-start overflow-hidden px-[5vw] lg:px-[10vw]"
       ref={parentRef}
     >
       <SectionHeading
@@ -93,7 +94,7 @@ const Expertise: React.FC<Props> = ({ data }) => {
         </div>
         <div className="w-[90%] self-center flex items-center justify-start mt-6">
           <span className="text-dark-secondary mr-auto text-base md:text-lg font-semibold">
-            0<span>{current + 1}</span>/0{data.length}
+            {getPrefixedNumber(current + 1)}/{getPrefixedNumber(data.length)}
           </span>
           <button
             className={clsx(

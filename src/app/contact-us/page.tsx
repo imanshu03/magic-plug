@@ -2,7 +2,8 @@ import Contact from "@/Sections/Contact";
 import { getReferrers, getServices } from "@studio/queries";
 import React from "react";
 
-export const revalidate = 3600;
+const isDev = process.env.NEXT_PUBLIC_ENV === "development";
+export const revalidate = isDev ? 0 : 900;
 
 export default async function ContactUs() {
   const [services, referrers] = await Promise.allSettled([

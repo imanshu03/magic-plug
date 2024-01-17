@@ -5,7 +5,7 @@ import React from "react";
 import { usePathname } from "next/navigation";
 
 const anchorClass = clsx(
-  "overflow-hidden flex items-center justify-start cursor-pointer text-xs sm:text-sm md:text-base",
+  "overflow-hidden flex items-center justify-start cursor-pointer text-xs sm:text-sm md:text-base no-underline",
   "[&>div>.arrow1]:hover:translate-x-[100%] [&>div>.arrow1]:hover:-translate-y-[100%]",
   "[&>div>.arrow2]:hover:translate-x-0 [&>div>.arrow2]:hover:translate-y-0"
 );
@@ -35,14 +35,7 @@ export const NextLink: React.FC<{
   className?: string;
   children: React.ReactNode;
   triggerCallbackOnSamePath?: () => void;
-  withArrow?: boolean;
-}> = ({
-  href,
-  className = "",
-  children,
-  triggerCallbackOnSamePath,
-  withArrow = true,
-}) => {
+}> = ({ href, className = "", children, triggerCallbackOnSamePath }) => {
   const location = usePathname();
   const onSamePath = () => {
     if (location === href) triggerCallbackOnSamePath?.();
@@ -51,12 +44,19 @@ export const NextLink: React.FC<{
   return (
     <Link
       href={href}
-      className={clsx(withArrow ? anchorClass : "", className)}
+      className={clsx(
+        className,
+        "relative overflow-hidden [&>.blacked-text]:hover:-translate-y-[100%] [&>.themed-text]:hover:-translate-y-[100%]"
+      )}
       prefetch
       onClick={onSamePath}
     >
-      {children}
-      {withArrow ? Arrows : null}
+      <div className="flex items-center justify-start w-full h-full relative blacked-text transition-transform duration-500 ease-in-out">
+        {children}
+      </div>
+      <div className="w-full h-full absolute top-full left-0 text-[1em] text-theme themed-text transition-transform duration-500 ease-in-out">
+        {children}
+      </div>
     </Link>
   );
 };

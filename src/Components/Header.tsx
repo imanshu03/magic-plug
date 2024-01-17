@@ -7,11 +7,12 @@ import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
 import Link from "next/link";
 import Menu from "./Menu";
+import { LinkData } from "@/types";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-const Header = () => {
+const Header: React.FC<LinkData> = ({ linkData }) => {
   const [hide, setHide] = useState(false);
   const [currentTime, setCurrentTime] = useState(Date.now());
 
@@ -64,7 +65,7 @@ const Header = () => {
   return (
     <header
       className={clsx(
-        "w-screen h-auto fixed top-0 left-0 z-40 px-[5vw] lg:px-[10vw] flex items-center justify-start py-2 sm:py-3 md:py-4 lg:py-5 xl:py-6 bg-app-bg/40 backdrop-blur-md transition-transform duration-500 font-manrope",
+        "w-screen h-auto fixed top-0 left-0 z-40 px-[5vw] lg:px-[10vw] flex items-center justify-start py-2 sm:py-3 md:py-4 lg:py-5 xl:py-6 bg-app-bg/40 backdrop-blur-md transition-transform duration-500",
         "text-dark-primary",
         hide ? "-translate-y-[100%]" : ""
       )}
@@ -89,7 +90,7 @@ const Header = () => {
       <p className="font-medium mr-4 md:mr-8 lg:mr-12 xl:mr-24 text-xs sm:text-sm md:text-base order-3 md:order-2">
         India,&nbsp;{getFormattedTime()}
       </p>
-      <Menu className="order-1 md:order-3 mr-2 md:mr-0" />
+      <Menu className="order-1 md:order-3 mr-2 md:mr-0" linkData={linkData} />
     </header>
   );
 };

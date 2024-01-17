@@ -80,7 +80,7 @@ const Intro = () => {
 
   return (
     <section
-      className="w-screen h-screen flex items-center justify-center relative bg-app-bg overflow-hidden font-manrope"
+      className="w-screen h-screen flex items-center justify-center relative bg-app-bg overflow-hidden"
       ref={scrollerRef}
     >
       <div

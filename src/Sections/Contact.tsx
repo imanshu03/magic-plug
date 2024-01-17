@@ -1,13 +1,13 @@
 "use client";
 import React from "react";
 import { useForm } from "react-hook-form";
-import Checkbox from "@/Components/Checkbox";
-import Input from "@/Components/Input";
-import Radio from "@/Components/Radio";
-import TextArea from "@/Components/TextArea";
-import { CustomLink } from "@/Components/Links";
-import ArrowIcon from "@/Icons/Arrow";
+import Checkbox from "@/Atoms/Checkbox";
+import Input from "@/Atoms/Input";
+import Radio from "@/Atoms/Radio";
+import TextArea from "@/Atoms/TextArea";
+import { CustomLink } from "@/Atoms/Links";
 import { ReferrerCollection, ServiceCollection } from "@studio/types";
+import { Button } from "@/Atoms/Button";
 
 interface FormInputs {
   name: string;
@@ -41,7 +41,7 @@ const Contact: React.FC<Props> = ({ services, referrers }) => {
   });
 
   return (
-    <section className="w-screen min-h-screen font-manrope bg-app-bg pt-[68px] sm:pt-[76px] md:pt-[84px] lg:pt-[92px] xl:pt-[100px] px-[5vw] lg:px-[10vw]">
+    <section className="w-screen min-h-screen bg-app-bg pt-[68px] sm:pt-[76px] md:pt-[84px] lg:pt-[92px] xl:pt-[100px] px-[5vw] lg:px-[10vw]">
       <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-7xl leading-tight font-semibold">
         Let&apos;s team up and
         <br />
@@ -153,19 +153,9 @@ const Contact: React.FC<Props> = ({ services, referrers }) => {
               <CustomLink href="">contact us on whatsapp</CustomLink>
             </div>
           </div>
-          <button
-            type="submit"
-            className="order-1 md:order-2 rounded-full relative [&>.btn-content]:hover:[clip-path:circle(100%)] overflow-hidden"
-          >
-            <div className="border border-solid border-dark-primary px-4 py-2 lg:px-5 lg:py-3 xl:px-6 xl:py-4 flex items-center justify-center rounded-full">
-              Start a journey&nbsp;
-              <ArrowIcon className="rotate-180" />
-            </div>
-            <div className="absolute left-0 top-0 w-full h-full px-4 py-2 lg:px-5 lg:py-3 xl:px-6 xl:py-4 flex items-center justify-center btn-content [clip-path:circle(100%)] md:[clip-path:circle(0%)] bg-theme text-light-primary transition-all duration-500 ease-in-out">
-              Start a journey&nbsp;
-              <ArrowIcon className="rotate-180 [&>*]:stroke-light-primary" />
-            </div>
-          </button>
+          <Button type="submit" className="order-1 md:order-2">
+            Get in touch
+          </Button>
         </div>
       </form>
     </section>

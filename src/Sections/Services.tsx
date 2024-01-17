@@ -2,10 +2,12 @@
 import React, { useEffect, useRef } from "react";
 import gsap, { Power4 } from "gsap";
 
-import { SectionHeading } from "@/Components/Heading";
+import { SectionHeading } from "@/Atoms/Heading";
 import { useAnimation } from "@/hooks";
 import clsx from "clsx";
 import { ServiceCollection } from "@studio/types";
+import Link from "next/link";
+import { getPrefixedNumber } from "@/utils";
 
 interface Props {
   data: ServiceCollection;
@@ -61,11 +63,11 @@ const Services: React.FC<Props> = ({ data }) => {
 
   return (
     <section
-      className="w-screen h-auto md:h-[400vh] font-manrope relative"
+      className="w-screen h-auto md:h-[400vh] relative"
       id="services"
       ref={parentRef}
     >
-      <div className="w-full h-auto min-h-screen md:h-screen flex flex-col items-center justify-center sticky top-0 left-0 overflow-hidden lg:px-[10vw]">
+      <div className="w-full h-auto min-h-screen md:h-screen flex flex-col items-center justify-center sticky top-0 left-0 overflow-hidden md:px-[5vw] lg:px-[10vw]">
         <SectionHeading
           heading="Our services"
           className="w-full items-center px-[5vw] md:px-0"
@@ -83,12 +85,13 @@ const Services: React.FC<Props> = ({ data }) => {
             ref={scrollerRef}
           >
             {data.map((item, i) => (
-              <div
+              <Link
                 className="flex flex-col items-start justify-start w-[320px] md:w-[500px] shrink-0 p-4 md:p-6 lg:p-8 bg-theme rounded-xl box-border mr-6 snap-start md:snap-align-none shadow-md"
                 key={i}
+                href={item.slug}
               >
                 <div className="text-8xl text-light-primary/10 font-semibold mb-10 grow">
-                  0{i + 1}
+                  {getPrefixedNumber(i + 1)}
                 </div>
                 <p className="text-light-primary text-left capitalize font-semibold text-xl md:text-2xl lg:text-3xl leading-tight">
                   {item.name}
@@ -96,7 +99,7 @@ const Services: React.FC<Props> = ({ data }) => {
                 <p className="text-light-primary text-left font-extralight text-base md:text-lg lg:text-xl mt-2 lg:mt-4 h-auto md:h-[200px]">
                   {item.description}
                 </p>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

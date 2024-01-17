@@ -1,6 +1,7 @@
 "use client";
 import Footer from "@/Components/Footer";
 import Header from "@/Components/Header";
+import { LinkData } from "@/types";
 import Lenis from "@studio-freight/lenis";
 import { useSelectedLayoutSegment } from "next/navigation";
 import React, { createContext, useContext, useEffect, useState } from "react";
@@ -9,9 +10,11 @@ const ScrollContext = createContext<Lenis | null>(null);
 
 export const useScroll = () => useContext(ScrollContext);
 
-const SmoothScrollWrapper: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+const SmoothScrollWrapper: React.FC<
+  {
+    children: React.ReactNode;
+  } & LinkData
+> = ({ children, linkData }) => {
   const active = useSelectedLayoutSegment();
   const [lenisScroll, setLenisScroll] = useState<Lenis | null>(null);
 
@@ -37,9 +40,9 @@ const SmoothScrollWrapper: React.FC<{ children: React.ReactNode }> = ({
     <>{children}</>
   ) : (
     <ScrollContext.Provider value={lenisScroll}>
-      <Header />
+      <Header linkData={linkData} />
       {children}
-      <Footer />
+      <Footer linkData={linkData} />
     </ScrollContext.Provider>
   );
 };

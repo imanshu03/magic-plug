@@ -5,7 +5,7 @@ import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { TextPlugin } from "gsap/dist/TextPlugin";
 import clsx from "clsx";
 import lottie from "lottie-web";
-import { ColoredHeading } from "@/Components/Heading";
+import { ColoredHeading } from "@/Atoms/Heading";
 import { useAnimation } from "@/hooks";
 
 const commonTextClass =
@@ -84,7 +84,7 @@ const About = () => {
   );
 
   return (
-    <section className="bg-app-bg font-manrope w-screen px-[5vw] lg:px-[10vw]">
+    <section className="bg-app-bg w-screen px-[5vw] lg:px-[10vw]">
       <div
         className="h-auto md:h-[200vh] w-full box-border relative"
         ref={scrollerRef}

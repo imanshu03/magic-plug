@@ -1,6 +1,6 @@
-const Services = {
-  title: "Services",
-  name: "services",
+const Contact = {
+  title: "Contact",
+  name: "contact",
   type: "document",
   fields: [
     {
@@ -8,8 +8,12 @@ const Services = {
       type: "string",
     },
     {
-      name: "description",
+      name: "link",
       type: "string",
+    },
+    {
+      name: "social",
+      type: "boolean",
     },
     {
       name: "priority",
@@ -18,4 +22,4 @@ const Services = {
   ],
 };
 
-export default Services;
+export default Contact;

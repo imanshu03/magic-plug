@@ -8,15 +8,12 @@ const Clients = {
       type: "string",
     },
     {
-      name: "link",
-      type: "url",
-    },
-    {
       name: "image",
       type: "image",
       options: {
         storeOriginalFilename: true,
       },
+      fields: [{ type: "string", name: "alt" }],
     },
   ],
 };
