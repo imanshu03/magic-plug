@@ -210,14 +210,6 @@ const SlugPageLayout: React.FC<Props> = ({ data, slug, children = null }) => {
         </article>
       ) : null}
       {children}
-      {data.footer ? (
-        <article className="prose max-w-none prose-sm md:prose-lg lg:prose-xl text-dark-primary">
-          <PortableText
-            value={data.footer}
-            components={portableTextComponents}
-          />
-        </article>
-      ) : null}
     </>
   );
 };
