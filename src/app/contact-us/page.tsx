@@ -1,9 +1,14 @@
 import Contact from "@/Sections/Contact";
 import { getReferrers, getServices } from "@studio/queries";
+import { Metadata } from "next";
 import React from "react";
 
 const isDev = process.env.NEXT_PUBLIC_ENV === "development";
 export const revalidate = isDev ? 0 : 900;
+
+export const metadata: Metadata = {
+  title: "Contact Us | MagicPlug",
+};
 
 export default async function ContactUs() {
   const [services, referrers] = await Promise.allSettled([

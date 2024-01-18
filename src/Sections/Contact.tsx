@@ -8,6 +8,7 @@ import TextArea from "@/Atoms/TextArea";
 import { CustomLink } from "@/Atoms/Links";
 import { ReferrerCollection, ServiceCollection } from "@studio/types";
 import { Button } from "@/Atoms/Button";
+import { toast } from "react-toastify";
 
 interface FormInputs {
   name: string;
@@ -29,6 +30,7 @@ const Contact: React.FC<Props> = ({ services, referrers }) => {
     handleSubmit,
     watch,
     formState: { errors },
+    reset,
   } = useForm<FormInputs>({
     defaultValues: {
       name: "",
@@ -39,6 +41,26 @@ const Contact: React.FC<Props> = ({ services, referrers }) => {
       project: "",
     },
   });
+
+  const onFormSubmit = async (e: FormInputs) => {
+    try {
+      await fetch("/api/send-mail", {
+        method: "POST",
+        body: JSON.stringify(e),
+        headers: {
+          "content-type": "application/json",
+        },
+      });
+      if (window.trackGAEvent)
+        window.trackGAEvent("event", "lead_client_info", e);
+      toast.success(
+        "We have received your message. We will reach out to you in next 24 hours."
+      );
+      reset();
+    } catch {
+      toast.error("Something went wrong, Please try again.");
+    }
+  };
 
   return (
     <section className="w-screen min-h-screen bg-app-bg pt-[68px] sm:pt-[76px] md:pt-[84px] lg:pt-[92px] xl:pt-[100px] px-[5vw] lg:px-[10vw]">
@@ -54,7 +76,7 @@ const Contact: React.FC<Props> = ({ services, referrers }) => {
       <form
         className="flex flex-col items-stretch justify-start text-base md:text-[2vw] font-medium mt-6 md:mt-10 lg:mt-16 tracking-wide gap-7"
         autoComplete="off"
-        onSubmit={handleSubmit(console.log)}
+        onSubmit={handleSubmit(onFormSubmit)}
       >
         <div className="flex flex-col md:flex-row items-stretch md:items-center justify-start gap-2">
           <span>Hi! My name is</span>

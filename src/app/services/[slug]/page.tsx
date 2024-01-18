@@ -6,9 +6,21 @@ import SlugPageLayout, {
   portableTextComponents,
 } from "@/Components/SlugPageLayout";
 import StarIcon from "@/Icons/Star";
+import { Metadata, ResolvingMetadata } from "next";
 
 const isDev = process.env.NEXT_PUBLIC_ENV === "development";
 export const revalidate = isDev ? 0 : 900;
+
+export async function generateMetadata({
+  params: { slug },
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const data = await getServicesPage(`/services/${slug}`);
+  return {
+    title: `${data.pageTitle} | MagicPlug`,
+  };
+}
 
 export default async function ServicesSlugPage({
   params,

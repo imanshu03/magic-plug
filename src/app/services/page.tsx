@@ -5,9 +5,14 @@ import { getPrefixedNumber } from "@/utils";
 import StarIcon from "@/Icons/Star";
 import { CustomLink } from "@/Atoms/Links";
 import SlugPageLayout from "@/Components/SlugPageLayout";
+import { Metadata } from "next";
 
 const isDev = process.env.NEXT_PUBLIC_ENV === "development";
 export const revalidate = isDev ? 0 : 900;
+
+export const metadata: Metadata = {
+  title: "Services | MagicPlug",
+};
 
 export default async function ServicesPage() {
   const data = await getPageData("services");

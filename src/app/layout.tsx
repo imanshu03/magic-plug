@@ -9,6 +9,8 @@ import Script from "next/script";
 import SmoothScrollWrapper from "../Components/SmoothScrollWrapper";
 import { getDynamicPages, getSocialLinks } from "@studio/queries";
 import { LinkData } from "@/types";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -224,20 +226,26 @@ export default async function RootLayout({
         {cssContent.map((content, i) => (
           <style key={i} dangerouslySetInnerHTML={{ __html: content }}></style>
         ))}
-        <Script src="https://www.googletagmanager.com/gtag/js?id=G-X2L15MZPF3"></Script>
-        <Script id="google-analytics">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag() {
-              dataLayer.push(arguments);
-            }
-            gtag("js", new Date());
-
-            gtag("config", "G-X2L15MZPF3");
-          `}
-        </Script>
+        {process.env.NEXT_PUBLIC_ENV !== "development" ? (
+          <>
+            <Script src="https://www.googletagmanager.com/gtag/js?id=G-X2L15MZPF3"></Script>
+            <Script id="google-analytics">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag() {
+                  dataLayer.push(arguments);
+                }
+                window.trackGAEvent = gtag;
+                gtag("js", new Date());
+    
+                gtag("config", "G-X2L15MZPF3");
+              `}
+            </Script>
+          </>
+        ) : null}
       </head>
       <body className="bg-app-bg w-screen h-auto font-manrope">
+        <ToastContainer className="text-dark-primary font-manrope" />
         <SmoothScrollWrapper linkData={linkData}>
           {children}
         </SmoothScrollWrapper>
