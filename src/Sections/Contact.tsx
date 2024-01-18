@@ -171,8 +171,8 @@ const Contact: React.FC<Props> = ({ services, referrers }) => {
               <CustomLink href="mailto:hello@magicplug.tech">
                 Drop us a mail on hello@magicplug.tech
               </CustomLink>
-              <span className="mx-4">or</span>
-              <CustomLink href="">contact us on whatsapp</CustomLink>
+              {/* <span className="mx-4">or</span>
+              <CustomLink href="">contact us on whatsapp</CustomLink> */}
             </div>
           </div>
           <Button type="submit" className="order-1 md:order-2">
