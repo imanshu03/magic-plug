@@ -52,7 +52,6 @@ export type DynamicPageData = {
     title: string;
     slug: string;
   };
-  footer: any;
 };
 
 export type DynamicServicePageData = {
@@ -74,13 +73,6 @@ export type DynamicServicePageData = {
     heading: string;
     description: string;
   }>;
-  techDescription?: any;
-  techStack?: Array<{
-    asset: any;
-    alt: string;
-    className?: string;
-  }>;
-  footer: any;
 };
 
 export type StatsSchema = {};

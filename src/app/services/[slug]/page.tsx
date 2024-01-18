@@ -6,7 +6,8 @@ import SlugPageLayout, {
   portableTextComponents,
 } from "@/Components/SlugPageLayout";
 import StarIcon from "@/Icons/Star";
-import { Metadata, ResolvingMetadata } from "next";
+import { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 const isDev = process.env.NEXT_PUBLIC_ENV === "development";
 export const revalidate = isDev ? 0 : 900;
@@ -16,7 +17,7 @@ export async function generateMetadata({
 }: {
   params: { slug: string };
 }): Promise<Metadata> {
-  const data = await getServicesPage(`/services/${slug}`);
+  const data = await getServicesPage(slug);
   return {
     title: `${data.pageTitle} | MagicPlug`,
   };
@@ -27,7 +28,9 @@ export default async function ServicesSlugPage({
 }: {
   params: { slug: string };
 }) {
-  const data = await getServicesPage(`/services/${params.slug}`);
+  const data = await getServicesPage(params.slug);
+
+  if (!data.pageTitle) notFound();
 
   return (
     <main

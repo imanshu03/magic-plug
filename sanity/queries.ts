@@ -120,7 +120,6 @@ export const getPageData = async (slug: string) => {
       title: "",
       slug: "",
     },
-    footer: null,
   };
 
   try {
@@ -167,8 +166,6 @@ export const getServicesPage = async (slug: string) => {
       title: "",
       slug: "",
     },
-    techDescription: null,
-    techStack: [],
     image: {
       asset: null,
       alt: "",
@@ -176,17 +173,20 @@ export const getServicesPage = async (slug: string) => {
       isInline: false,
       after: false,
     },
-    footer: null,
   };
 
   try {
     const data = await sanityClient.fetch(`
-            *[_type == "services" && slug == "${slug}"]{
-              name,
-              pageData
+            *[_type == "servicesPage" && slug == "${slug}"]{
+              pageTitle,
+              description,
+              servicesDescription,
+              servicesProvided,
+              cta,
+              image
             }`);
     if (data.length) {
-      result = { ...data[0].pageData, pageTitle: data[0].name };
+      result = data[0];
     }
   } finally {
     return result;

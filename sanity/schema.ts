@@ -6,7 +6,17 @@ import Contact from "./schemas/contact";
 import Pages from "./schemas/pages";
 import Services from "./schemas/services";
 import { Break } from "./common";
+import ServicesPage from "./schemas/servicePage";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [Expertise, Clients, Referrer, Contact, Pages, Services, Break],
+  types: [
+    Expertise,
+    Clients,
+    Referrer,
+    Contact,
+    Pages,
+    Services,
+    Break,
+    ServicesPage,
+  ],
 };
