@@ -8,6 +8,7 @@ const ClutchLogo = () => {
       width={190}
       height={45}
       referrerPolicy="no-referrer"
+      title="Clutch Reviews"
     />
   );
 };
