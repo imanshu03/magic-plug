@@ -30,6 +30,7 @@ const Clients: React.FC<Props> = ({ data }) => {
               key={name}
               alt={name}
               className="shrink-0 mix-blend-darken w-[60px] h-[60px] lg:w-[100px] lg:h-[100px]"
+              priority
             />
           );
         })}
