@@ -5,12 +5,13 @@ import React from "react";
 
 export const Button: React.FC<
   React.ButtonHTMLAttributes<HTMLButtonElement>
-> = ({ children, className = "", ...props }) => {
+> = ({ children, className = "", disabled = false, ...props }) => {
   return (
     <button
       className={clsx(
-        "rounded-full relative [&>.btn-content]:hover:[clip-path:circle(100%)] overflow-hidden flex items-center justify-center",
-        className
+        "rounded-full relative [&>.btn-content]:hover:[clip-path:circle(100%)] overflow-hidden flex items-center justify-center transition-colors ease-out duration-500",
+        className,
+        disabled ? "pointer-events-none grayscale" : ""
       )}
       {...props}
     >

@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Checkbox from "@/Atoms/Checkbox";
 import Input from "@/Atoms/Input";
@@ -25,12 +25,14 @@ interface Props {
 }
 
 const Contact: React.FC<Props> = ({ services, referrers }) => {
+  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
     reset,
+    clearErrors,
   } = useForm<FormInputs>({
     defaultValues: {
       name: "",
@@ -43,6 +45,7 @@ const Contact: React.FC<Props> = ({ services, referrers }) => {
   });
 
   const onFormSubmit = async (e: FormInputs) => {
+    setLoading(true);
     try {
       await fetch("/api/send-mail", {
         method: "POST",
@@ -57,8 +60,11 @@ const Contact: React.FC<Props> = ({ services, referrers }) => {
         "We have received your message. We will reach out to you in next 24 hours."
       );
       reset();
+      clearErrors();
     } catch {
       toast.error("Something went wrong, Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -175,7 +181,11 @@ const Contact: React.FC<Props> = ({ services, referrers }) => {
               <CustomLink href="">contact us on whatsapp</CustomLink> */}
             </div>
           </div>
-          <Button type="submit" className="order-1 md:order-2">
+          <Button
+            type="submit"
+            className="order-1 md:order-2"
+            disabled={loading}
+          >
             Get in touch
           </Button>
         </div>
