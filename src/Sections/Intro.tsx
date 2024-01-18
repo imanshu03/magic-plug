@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useRef } from "react";
 import gsap, { Power4 } from "gsap";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
@@ -52,6 +53,7 @@ const Intro = () => {
   };
 
   const addStaticAnimation = () => {
+    textMoverRef.current?.removeAttribute("style");
     mainTimeline.current?.kill();
     scrollTimeline.current?.kill();
     animation.current?.destroy();
@@ -78,7 +80,7 @@ const Intro = () => {
 
   return (
     <section
-      className="w-screen h-screen flex items-center justify-center relative bg-app-bg overflow-hidden font-manrope"
+      className="w-screen h-screen flex items-center justify-center relative bg-app-bg overflow-hidden"
       ref={scrollerRef}
     >
       <div

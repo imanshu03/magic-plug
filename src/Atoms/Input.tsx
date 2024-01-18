@@ -1,9 +1,9 @@
 import clsx from "clsx";
 import React, { forwardRef } from "react";
 
-const TextArea = forwardRef<
-  HTMLTextAreaElement,
-  React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
+const Input = forwardRef<
+  HTMLInputElement,
+  React.InputHTMLAttributes<HTMLInputElement> & {
     error: Boolean;
     inputClassName?: string;
   }
@@ -15,23 +15,21 @@ const TextArea = forwardRef<
     <div
       className={clsx(
         "pb-[1px] box-border inline-block transition-colors duration-500 text-center text-base md:text-[0.8em]",
-        "border-b border-solid border-b-dark-primary/50 hover:border-b-dark-primary focus:border-b-dark-primary",
+        "border-b border-solid focus:border-b-dark-primary border-b-dark-primary/50 hover:border-b-dark-primary",
         error ? "border-b-red-500" : "",
         "relative [&>span]:hover:text-dark-primary",
         className
       )}
     >
-      <label htmlFor={props.id} className="hidden">
-        {props.name}
-      </label>
-      <textarea
+      <input
         className={clsx(
-          "relative z-[1] bg-transparent [&~span]:focus:hidden text-left w-full h-full min-h-[48px]",
+          "relative z-[1] bg-transparent [&~span]:focus:hidden text-center w-full",
           inputClassName
         )}
         {...props}
         ref={ref}
-      ></textarea>
+        aria-label={props.id}
+      />
       {placeholder && !props.value ? (
         <span
           className={clsx(
@@ -46,4 +44,4 @@ const TextArea = forwardRef<
   );
 });
 
-export default TextArea;
+export default Input;

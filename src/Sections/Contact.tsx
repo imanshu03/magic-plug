@@ -1,13 +1,15 @@
 "use client";
 import React from "react";
 import { useForm } from "react-hook-form";
-import Checkbox from "@/Components/Checkbox";
-import Input from "@/Components/Input";
-import Radio from "@/Components/Radio";
-import TextArea from "@/Components/TextArea";
-import { SERVICES_DATA } from "@/data";
-import CustomLink from "@/Components/CustomLink";
-import ArrowIcon from "@/Icons/Arrow";
+import Checkbox from "@/Atoms/Checkbox";
+import Input from "@/Atoms/Input";
+import Radio from "@/Atoms/Radio";
+import TextArea from "@/Atoms/TextArea";
+import { CustomLink } from "@/Atoms/Links";
+import { ReferrerCollection, ServiceCollection } from "@studio/types";
+import { Button } from "@/Atoms/Button";
+import { toast } from "react-toastify";
+
 interface FormInputs {
   name: string;
   company: string;
@@ -17,16 +19,18 @@ interface FormInputs {
   project: string;
 }
 
-const REFERRAL_DATA = ["Linkedin", "Google Search", "Word of Mouth", "Others"];
+interface Props {
+  services: ServiceCollection;
+  referrers: ReferrerCollection;
+}
 
-const Contact = () => {
+const Contact: React.FC<Props> = ({ services, referrers }) => {
   const {
     register,
     handleSubmit,
     watch,
-    getValues,
-    setValue,
     formState: { errors },
+    reset,
   } = useForm<FormInputs>({
     defaultValues: {
       name: "",
@@ -38,9 +42,29 @@ const Contact = () => {
     },
   });
 
+  const onFormSubmit = async (e: FormInputs) => {
+    try {
+      await fetch("/api/send-mail", {
+        method: "POST",
+        body: JSON.stringify(e),
+        headers: {
+          "content-type": "application/json",
+        },
+      });
+      if (window.trackGAEvent)
+        window.trackGAEvent("event", "lead_client_info", e);
+      toast.success(
+        "We have received your message. We will reach out to you in next 24 hours."
+      );
+      reset();
+    } catch {
+      toast.error("Something went wrong, Please try again.");
+    }
+  };
+
   return (
-    <section className="w-screen min-h-screen font-manrope bg-app-bg pt-[68px] sm:pt-[76px] md:pt-[84px] lg:pt-[92px] xl:pt-[100px] px-[5vw] lg:px-[10vw]">
-      <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-7xl leading-tight font-semibold">
+    <section className="w-screen min-h-screen bg-app-bg pt-[68px] sm:pt-[76px] md:pt-[84px] lg:pt-[92px] xl:pt-[100px] px-[5vw] lg:px-[10vw]">
+      <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-7xl leading-tight font-semibold">
         Let&apos;s team up and
         <br />
         make&nbsp;
@@ -48,11 +72,11 @@ const Contact = () => {
           M<span className="font-hurricane text-[1.5em]">agic</span>
         </span>
         &nbsp;&nbsp;happen!
-      </h2>
+      </h1>
       <form
         className="flex flex-col items-stretch justify-start text-base md:text-[2vw] font-medium mt-6 md:mt-10 lg:mt-16 tracking-wide gap-7"
         autoComplete="off"
-        onSubmit={handleSubmit(console.log)}
+        onSubmit={handleSubmit(onFormSubmit)}
       >
         <div className="flex flex-col md:flex-row items-stretch md:items-center justify-start gap-2">
           <span>Hi! My name is</span>
@@ -82,13 +106,13 @@ const Contact = () => {
           <span className="shrink-0 mr-2 w-full md:w-auto">
             I found you through:
           </span>
-          {REFERRAL_DATA.map((item, idx) => (
+          {referrers.map(({ name }, idx) => (
             <Radio
-              label={item}
-              value={item}
+              label={name}
+              value={name}
               className="shrink-0"
               key={idx}
-              checked={watch("referral") === item}
+              checked={watch("referral") === name}
               {...register("referral", { required: true })}
               error={!!errors.referral}
             />
@@ -98,14 +122,14 @@ const Contact = () => {
           <span className="shrink-0 w-full md:w-auto">
             I&apos;m looking for help with:
           </span>
-          {SERVICES_DATA.map(({ heading }, idx) => (
+          {services.map(({ name }, idx) => (
             <Checkbox
-              label={heading}
-              value={heading}
+              label={name}
+              value={name}
               key={idx}
               className="shrink-0"
               id={`services.${idx}`}
-              checked={watch("services").includes(heading)}
+              checked={watch("services").includes(name)}
               {...register("services", { required: true })}
               error={!!errors.services}
             />
@@ -151,17 +175,9 @@ const Contact = () => {
               <CustomLink href="">contact us on whatsapp</CustomLink>
             </div>
           </div>
-          <button
-            type="submit"
-            className="order-1 md:order-2 rounded-full border border-solid border-dark-primary px-6 py-3 flex items-center justify-center relative [&>.btn-content]:hover:[clip-path:circle(100%)] overflow-hidden"
-          >
-            Start a journey&nbsp;
-            <ArrowIcon className="rotate-180" />
-            <div className="absolute left-0 right-0 w-full h-full px-6 py-3 flex items-center justify-center btn-content [clip-path:circle(100%)] md:[clip-path:circle(0%)] bg-theme text-light-primary transition-all duration-500 ease-in-out">
-              Start a journey&nbsp;
-              <ArrowIcon className="rotate-180 [&>*]:stroke-light-primary" />
-            </div>
-          </button>
+          <Button type="submit" className="order-1 md:order-2">
+            Get in touch
+          </Button>
         </div>
       </form>
     </section>
