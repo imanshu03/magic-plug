@@ -9,7 +9,7 @@ import { Metadata } from "next";
 import Loader from "@/Atoms/Loader";
 import { notFound } from "next/navigation";
 
-const isDev = process.env.NEXT_PUBLIC_ENV === "development";
+const isDev = process.env.ENVIRONMENT === "development";
 export const revalidate = isDev ? 0 : 900;
 
 export const metadata: Metadata = {

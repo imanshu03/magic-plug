@@ -15,7 +15,7 @@ import Clients from "@/Sections/Clients";
 import { Suspense } from "react";
 import Loader from "@/Atoms/Loader";
 
-const isDev = process.env.NEXT_PUBLIC_ENV === "development";
+const isDev = process.env.ENVIRONMENT === "development";
 export const revalidate = isDev ? 0 : 900;
 
 export default async function Home() {

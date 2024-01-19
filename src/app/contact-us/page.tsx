@@ -4,7 +4,7 @@ import { getReferrers, getServices } from "@studio/queries";
 import { Metadata } from "next";
 import React, { Suspense } from "react";
 
-const isDev = process.env.NEXT_PUBLIC_ENV === "development";
+const isDev = process.env.ENVIRONMENT === "development";
 export const revalidate = isDev ? 0 : 900;
 
 export const metadata: Metadata = {

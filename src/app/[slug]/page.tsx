@@ -7,7 +7,7 @@ import { notFound } from "next/navigation";
 import { convertSlugToName } from "@/utils";
 import Loader from "@/Atoms/Loader";
 
-const isDev = process.env.NEXT_PUBLIC_ENV === "development";
+const isDev = process.env.ENVIRONMENT === "development";
 export const revalidate = isDev ? 0 : 900;
 
 export async function generateMetadata({

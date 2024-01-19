@@ -224,7 +224,7 @@ export default async function RootLayout({
         {cssContent.map((content, i) => (
           <style key={i} dangerouslySetInnerHTML={{ __html: content }}></style>
         ))}
-        {process.env.NEXT_PUBLIC_ENV !== "development" ? (
+        {process.env.ENVIRONMENT !== "development" ? (
           <>
             <Script src="https://www.googletagmanager.com/gtag/js?id=G-X2L15MZPF3"></Script>
             <Script id="google-analytics">
