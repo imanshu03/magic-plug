@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   title: "Services | MagicPlug",
 };
 
-export default async function ServicesPage() {
+export default function ServicesPage() {
   const data = getPageData("services");
 
   if (!data) notFound();

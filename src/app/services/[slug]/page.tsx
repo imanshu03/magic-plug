@@ -28,7 +28,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function ServicesSlugPage({
+export default function ServicesSlugPage({
   params: { slug },
 }: {
   params: { slug: string };
