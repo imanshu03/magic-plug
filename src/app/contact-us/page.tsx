@@ -1,6 +1,7 @@
 import Loader from "@/Atoms/Loader";
 import Contact from "@/Sections/Contact";
-import { getReferrers, getServices } from "@studio/queries";
+import { SERVICES_DATA } from "@/dataStore/services";
+import { getReferrers, getSocialLinks } from "@studio/queries";
 import { Metadata } from "next";
 import React, { Suspense } from "react";
 
@@ -12,14 +13,18 @@ export const metadata: Metadata = {
 };
 
 export default async function ContactUs() {
-  const [services, referrers] = await Promise.allSettled([
-    getServices(),
+  const [socials, referrers] = await Promise.allSettled([
+    getSocialLinks(),
     getReferrers(),
   ]);
 
   const props = {
-    services: services.status === "fulfilled" ? services.value : [],
+    services: SERVICES_DATA,
     referrers: referrers.status === "fulfilled" ? referrers.value : [],
+    socialLinks:
+      socials.status === "fulfilled"
+        ? socials.value.filter((e) => !e.social)
+        : [],
   };
 
   return (
