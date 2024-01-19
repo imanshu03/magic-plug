@@ -1,5 +1,5 @@
 import { PortableText } from "@portabletext/react";
-import { getServicesPage } from "@studio/queries";
+import { getServiceExcludingCurrent, getServicesPage } from "@studio/queries";
 import clsx from "clsx";
 import React, { Suspense } from "react";
 import SlugPageLayout, {
@@ -10,6 +10,9 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { convertSlugToName } from "@/utils";
 import Loader from "@/Atoms/Loader";
+import Divider from "@/Atoms/Divider";
+import { H3Heading } from "@/Atoms/Heading";
+import { CustomNextLink } from "@/Atoms/Links";
 
 const isDev = process.env.ENVIRONMENT === "development";
 export const revalidate = isDev ? 0 : 900;
@@ -32,6 +35,8 @@ export default async function ServicesSlugPage({
   const data = await getServicesPage(params.slug);
 
   if (!data) notFound();
+
+  const otherServices = await getServiceExcludingCurrent(params.slug);
 
   return (
     <Suspense fallback={<Loader />}>
@@ -70,6 +75,17 @@ export default async function ServicesSlugPage({
               ))}
             </div>
           ) : null}
+          <Divider margin fullWidth />
+          <article className="flex flex-col items-start justify-start prose max-w-none prose-sm md:prose-md lg:prose-lg text-dark-primary">
+            <H3Heading>Explore our other offered services:</H3Heading>
+            <ul>
+              {otherServices.map(({ name, slug }) => (
+                <li key={slug}>
+                  <CustomNextLink href={slug}>{name}</CustomNextLink>
+                </li>
+              ))}
+            </ul>
+          </article>
         </SlugPageLayout>
       </main>
     </Suspense>

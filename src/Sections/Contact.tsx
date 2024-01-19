@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import { useForm } from "react-hook-form";
 import Checkbox from "@/Atoms/Checkbox";
 import Input from "@/Atoms/Input";
@@ -181,14 +181,12 @@ const Contact: React.FC<Props> = ({ services, referrers, socialLinks }) => {
               <p>Don&apos;t like the forms?</p>
               <div className="flex flex-col md:flex-row items-center justify-start md:mt-2">
                 {socialLinks.map(({ name, description, link }, index) => (
-                  <>
-                    <CustomLink href={link} key={index}>
-                      {description || name}
-                    </CustomLink>
+                  <Fragment key={index}>
+                    <CustomLink href={link}>{description || name}</CustomLink>
                     {index !== socialLinks.length - 1 ? (
                       <span className="mx-4">or</span>
                     ) : null}
-                  </>
+                  </Fragment>
                 ))}
               </div>
             </div>

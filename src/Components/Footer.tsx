@@ -83,7 +83,6 @@ const Footer: React.FC<LinkData> = ({ linkData }) => {
         <div className="flex flex-col items-center justify-center mt-14">
           <span>&#169; Magic Plug Concepts Private Limited 2024</span>
           {linkData.secondaryPage.map(({ slug: { title, path } }) => (
-            // eslint-disable-next-line react/jsx-key
             <Link className="underline cursor-pointer" key={path} href={path}>
               {title}
             </Link>

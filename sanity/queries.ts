@@ -43,13 +43,12 @@ export const getServices = async () => {
   }
 };
 
-export const getServiceData = async () => {
+export const getServiceExcludingCurrent = async (slug: string) => {
   let result: ServiceCollection = [];
   try {
     const data = await sanityClient.fetch(`
-          *[_type == "services"]{
+          *[_type == "services" && slug != "/services/${slug}"]{
               name,
-              description,
               priority,
               slug
             } | order(priority desc)`);
@@ -153,7 +152,8 @@ export const getServicesPage = async (slug: string) => {
               servicesDescription,
               servicesProvided,
               cta,
-              image
+              image,
+              footer
             }`);
     if (data.length) {
       result = data[0];

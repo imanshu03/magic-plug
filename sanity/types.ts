@@ -74,6 +74,7 @@ export type DynamicServicePageData = {
     heading: string;
     description: string;
   }>;
+  footer: any;
 };
 
 export type StatsSchema = {};

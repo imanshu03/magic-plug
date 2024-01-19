@@ -10,6 +10,8 @@ import Divider from "../Atoms/Divider";
 import urlBuilder from "@sanity/image-url";
 import { getImageDimensions } from "@sanity/asset-utils";
 import { CustomLink } from "@/Atoms/Links";
+import ImageContainer from "@/Atoms/ImageContainer";
+import { H1Heading, H2Heading, H3Heading, H4Heading } from "@/Atoms/Heading";
 
 export const portableTextComponents: Partial<PortableTextReactComponents> = {
   hardBreak: () => <br />,
@@ -26,7 +28,7 @@ export const portableTextComponents: Partial<PortableTextReactComponents> = {
     ),
     link: (props) => {
       const {
-        value: { href, isInline },
+        value: { href },
         children,
       } = props;
       return <CustomLink href={href}>{children}</CustomLink>;
@@ -35,34 +37,16 @@ export const portableTextComponents: Partial<PortableTextReactComponents> = {
 
   block: {
     h1: ({ children }) => {
-      return (
-        <h1 className="text-2xl sm:text-3xl md:text-4xl xl:text-6xl leading-tight font-semibold">
-          {children}
-        </h1>
-      );
+      return <H1Heading>{children}</H1Heading>;
     },
     h2: ({ children }) => {
-      return (
-        <h2 className="text-xl sm:text-2xl md:text-3xl xl:text-5xl leading-tight font-semibold">
-          {children}
-        </h2>
-      );
+      return <H2Heading>{children}</H2Heading>;
     },
-    h3: (props) => {
-      return (
-        <h3 className="flex items-center justify-start">
-          <StarIcon className="mr-2" />
-          {props.children}
-        </h3>
-      );
+    h3: ({ children }) => {
+      return <H3Heading>{children}</H3Heading>;
     },
     h4: ({ children }) => {
-      return (
-        <h4 className="flex items-center justify-start">
-          <StarIcon className="mr-2" />
-          {children}
-        </h4>
-      );
+      return <H4Heading>{children}</H4Heading>;
     },
   },
   types: {
@@ -149,35 +133,30 @@ const SlugPageLayout: React.FC<Props> = ({ data, slug, children = null }) => {
               </LinkButton>
             ) : null}
           </div>
-          <div
+
+          <ImageContainer
+            src={imageData.src}
+            width={imageData.width}
+            height={imageData.height}
+            alt={data.image?.alt ?? `${slug} image`}
             className={clsx(
               "w-full md:w-[40%] h-auto order-1",
               isImageAfter ? "md:order-2" : ""
             )}
-          >
-            <Image
-              src={imageData.src}
-              width={imageData.width}
-              height={imageData.height}
-              alt={data.image?.alt ?? `${slug} image`}
-              className={clsx(data.image?.className)}
-              priority
-            />
-          </div>
+            imageClassName={clsx(data.image?.className)}
+          />
         </div>
       ) : (
         <>
           {imageData ? (
-            <div className="w-full h-auto">
-              <Image
-                src={imageData.src}
-                width={imageData.width}
-                height={imageData.height}
-                alt={data.image?.alt ?? `${slug} image`}
-                className={clsx(data.image?.className)}
-                priority
-              />
-            </div>
+            <ImageContainer
+              src={imageData.src}
+              width={imageData.width}
+              height={imageData.height}
+              alt={data.image?.alt ?? `${slug} image`}
+              className={clsx("w-full h-auto")}
+              imageClassName={clsx(data.image?.className)}
+            />
           ) : null}
           {data.pageTitle ? (
             <div className="flex justify-start items-center mb-2 md:mb-4 lg:mb-6">

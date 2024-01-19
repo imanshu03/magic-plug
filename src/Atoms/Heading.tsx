@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import StarIcon from "@/Icons/Star";
 import clsx from "clsx";
 
@@ -42,5 +42,39 @@ export const SectionHeading: React.FC<{
         </h3>
       ) : null}
     </div>
+  );
+};
+
+export const H1Heading: FC<{ children: React.ReactNode }> = ({ children }) => {
+  return (
+    <h1 className="text-2xl sm:text-3xl md:text-4xl xl:text-6xl leading-tight font-semibold">
+      {children}
+    </h1>
+  );
+};
+
+export const H2Heading: FC<{ children: React.ReactNode }> = ({ children }) => {
+  return (
+    <h2 className="text-xl sm:text-2xl md:text-3xl xl:text-5xl leading-tight font-semibold">
+      {children}
+    </h2>
+  );
+};
+
+export const H3Heading: FC<{ children: React.ReactNode }> = ({ children }) => {
+  return (
+    <h3 className="flex items-center justify-start">
+      <StarIcon className="mr-2" />
+      {children}
+    </h3>
+  );
+};
+
+export const H4Heading: FC<{ children: React.ReactNode }> = ({ children }) => {
+  return (
+    <h4 className="flex items-center justify-start">
+      <StarIcon className="mr-2" />
+      {children}
+    </h4>
   );
 };
