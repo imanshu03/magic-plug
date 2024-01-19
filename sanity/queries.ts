@@ -81,7 +81,8 @@ export const getSocialLinks = async () => {
               name,
               link,
               social,
-              priority
+              priority,
+              description
             } | order(priority desc)`);
     result = data;
   } finally {
