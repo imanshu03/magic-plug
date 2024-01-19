@@ -1,8 +1,6 @@
 import lottie from "lottie-web";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import resolveConfig from "tailwindcss/resolveConfig";
-import tailwindConfig from "../tailwind.config";
 
 type ScrollLottieArguments = {
   lottieTarget: HTMLElement;
@@ -69,6 +67,9 @@ export const getPrefixedNumber = (num: number) => {
   }
 };
 
-export const getTailwindConfig = () => {
-  return resolveConfig(tailwindConfig).theme;
-};
+export const convertSlugToName = (name: string) =>
+  name
+    .replaceAll("-", " ")
+    .split(" ")
+    .map((e) => `${e[0].toUpperCase()}${e.slice(1)}`)
+    .join(" ");

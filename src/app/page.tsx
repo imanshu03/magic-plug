@@ -12,7 +12,8 @@ import {
   getServices,
 } from "@studio/queries";
 import Clients from "@/Sections/Clients";
-import Script from "next/script";
+import { Suspense } from "react";
+import Loader from "@/Atoms/Loader";
 
 const isDev = process.env.NEXT_PUBLIC_ENV === "development";
 export const revalidate = isDev ? 0 : 900;
@@ -35,27 +36,29 @@ export default async function Home() {
   const clientsData = clients.status === "fulfilled" ? clients.value : [];
 
   return (
-    <main className="w-screen h-auto">
-      <Intro />
-      <About />
-      {expertiseData.length ? (
-        <>
-          <Divider margin />
-          <Expertise data={expertiseData} />
-        </>
-      ) : null}
-      <Divider />
-      <Carousel />
-      <Divider />
-      {servicesData.length ? <Services data={servicesData} /> : null}
-      {clientsData.length ? (
-        <>
-          <Divider margin direction="down" />
-          <Clients data={clientsData} />
-          <Divider margin direction="up" />
-        </>
-      ) : null}
-      <Contact {...contactPageProps} />
-    </main>
+    <Suspense fallback={<Loader />}>
+      <main className="w-screen h-auto">
+        <Intro />
+        <About />
+        {expertiseData.length ? (
+          <>
+            <Divider margin />
+            <Expertise data={expertiseData} />
+          </>
+        ) : null}
+        <Divider />
+        <Carousel />
+        <Divider />
+        {servicesData.length ? <Services data={servicesData} /> : null}
+        {clientsData.length ? (
+          <>
+            <Divider margin direction="down" />
+            <Clients data={clientsData} />
+            <Divider margin direction="up" />
+          </>
+        ) : null}
+        <Contact {...contactPageProps} />
+      </main>
+    </Suspense>
   );
 }

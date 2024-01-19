@@ -1,7 +1,8 @@
+import Loader from "@/Atoms/Loader";
 import Contact from "@/Sections/Contact";
 import { getReferrers, getServices } from "@studio/queries";
 import { Metadata } from "next";
-import React from "react";
+import React, { Suspense } from "react";
 
 const isDev = process.env.NEXT_PUBLIC_ENV === "development";
 export const revalidate = isDev ? 0 : 900;
@@ -22,8 +23,10 @@ export default async function ContactUs() {
   };
 
   return (
-    <main className="w-screen h-auto bg-app-bg">
-      <Contact {...props} />
-    </main>
+    <Suspense fallback={<Loader />}>
+      <main className="w-screen h-auto bg-app-bg">
+        <Contact {...props} />
+      </main>
+    </Suspense>
   );
 }

@@ -105,22 +105,7 @@ export const getDynamicPages = async () => {
 };
 
 export const getPageData = async (slug: string) => {
-  let result: DynamicPageData = {
-    pageTitle: "",
-    content: null,
-    description: null,
-    image: {
-      asset: null,
-      alt: "",
-      className: "",
-      isInline: false,
-      after: false,
-    },
-    cta: {
-      title: "",
-      slug: "",
-    },
-  };
+  let result: DynamicPageData | null = null;
 
   try {
     const data = await sanityClient.fetch(`
@@ -157,23 +142,7 @@ export const getClients = async () => {
 };
 
 export const getServicesPage = async (slug: string) => {
-  let result: DynamicServicePageData = {
-    pageTitle: "",
-    description: null,
-    servicesDescription: null,
-    servicesProvided: [],
-    cta: {
-      title: "",
-      slug: "",
-    },
-    image: {
-      asset: null,
-      alt: "",
-      className: "",
-      isInline: false,
-      after: false,
-    },
-  };
+  let result: DynamicServicePageData | null = null;
 
   try {
     const data = await sanityClient.fetch(`
