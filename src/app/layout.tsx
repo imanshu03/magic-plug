@@ -2,8 +2,6 @@
 import type { Metadata } from "next";
 import { Hurricane, Manrope } from "next/font/google";
 import "./globals.css";
-import path from "path";
-import fs from "fs";
 import clsx from "clsx";
 import Script from "next/script";
 import SmoothScrollWrapper from "../Components/SmoothScrollWrapper";
@@ -162,33 +160,6 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const cssContent: string[] = [];
-  const appendScriptsToHead = (pathName: string) => {
-    const files = fs.readdirSync(pathName);
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i];
-      const filePath = path.resolve(pathName, file);
-      const stat = fs.statSync(filePath);
-      if (stat.isFile()) {
-        const content = fs.readFileSync(filePath, { encoding: "utf-8" });
-        cssContent.push(content);
-      } else if (stat.isDirectory()) {
-        appendScriptsToHead(filePath);
-      }
-    }
-  };
-
-  let paths = ["static"];
-  let currentPath;
-  while (true) {
-    paths.unshift("..");
-    currentPath = path.resolve(__dirname, ...paths);
-    if (fs.existsSync(currentPath)) break;
-  }
-
-  const cssPaths = path.resolve(currentPath, "css");
-  appendScriptsToHead(cssPaths);
-
   const [socialData, dynamicPageData] = await Promise.allSettled([
     getSocialLinks(),
     getDynamicPages(),
@@ -222,9 +193,6 @@ export default async function RootLayout({
       )}
     >
       <head>
-        {cssContent.map((content, i) => (
-          <style key={i} dangerouslySetInnerHTML={{ __html: content }}></style>
-        ))}
         {process.env.ENVIRONMENT !== "development" ? (
           <>
             <Script src="https://www.googletagmanager.com/gtag/js?id=G-X2L15MZPF3"></Script>
