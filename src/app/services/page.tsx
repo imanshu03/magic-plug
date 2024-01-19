@@ -13,7 +13,7 @@ const isDev = process.env.ENVIRONMENT === "development";
 export const revalidate = isDev ? 0 : 900;
 
 export const metadata: Metadata = {
-  title: "Services | MagicPlug",
+  title: "Services | MagicPlug Concepts",
 };
 
 export default async function ServicesPage() {

@@ -16,7 +16,7 @@ export function generateMetadata({
   params: { slug: string };
 }): Metadata {
   return {
-    title: `${convertSlugToName(slug)} | MagicPlug`,
+    title: `${convertSlugToName(slug)} | MagicPlug Concepts`,
   };
 }
 

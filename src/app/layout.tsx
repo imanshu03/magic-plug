@@ -27,9 +27,9 @@ const hurricane = Hurricane({
 });
 
 export const metadata: Metadata = {
-  title: "MagicPlug",
+  title: "MagicPlug Concepts",
   description:
-    "Your trusted software development company in transforming ideas into cutting-edge digital solutions.",
+    "Magic Plug Concepts Private Limited: Your trusted software development company in transforming ideas into cutting-edge digital solutions.",
   icons: [
     {
       rel: "apple-touch-icon",
@@ -116,6 +116,20 @@ export const metadata: Metadata = {
     "msapplication-TileImage": "/favicons/ms-icon-144x144.png",
   },
   keywords: [
+    "MagicPlug Tech",
+    "MagicPlug Concepts Private Limited",
+    "Leading company in software development",
+    "Leading company in staff augmentation",
+    "Leading company in website development",
+    "Leading company in frontend development",
+    "Leading company in backend development",
+    "Leading company in server augmentation",
+    "Leading company in mobile application development",
+    "Leading company in flutter application development",
+    "Leading company in ios application development",
+    "Leading company in android application development",
+    "Leading company in quality assurance",
+    "Leading company in UI UX designs",
     "Software development",
     "IT Services",
     "Staff Augmentation",
