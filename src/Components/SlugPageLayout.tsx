@@ -91,6 +91,7 @@ export const portableTextComponents: Partial<PortableTextReactComponents> = {
             display: isInline ? "inline-block" : "block",
             aspectRatio: width / height,
           }}
+          priority
         />
       );
     },
