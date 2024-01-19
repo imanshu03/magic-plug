@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-sync-scripts */
-import type { Metadata, Viewport } from "next";
+import type { Metadata } from "next";
 import { Hurricane, Manrope } from "next/font/google";
 import "./globals.css";
 import path from "path";
@@ -148,12 +148,13 @@ export const metadata: Metadata = {
     "Salesforce CRM",
     "SEO services",
   ],
-};
-
-export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    viewportFit: "contain",
+  },
   themeColor: "#F5F5F5",
+  robots: "https://magicplug.tech",
 };
 
 export default async function RootLayout({
