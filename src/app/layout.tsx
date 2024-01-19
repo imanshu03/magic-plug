@@ -1,13 +1,15 @@
 /* eslint-disable @next/next/no-sync-scripts */
 import type { Metadata } from "next";
 import { Hurricane, Manrope } from "next/font/google";
-import "./globals.css";
 import clsx from "clsx";
 import Script from "next/script";
 import SmoothScrollWrapper from "../Components/SmoothScrollWrapper";
 import { getDynamicPages, getSocialLinks } from "@studio/queries";
 import { LinkData } from "@/types";
 import { ToastContainer } from "react-toastify";
+
+import "./globals.css";
+import bundleCss from "!raw-loader!./output.css";
 import "react-toastify/dist/ReactToastify.css";
 
 const manrope = Manrope({
@@ -195,6 +197,10 @@ export default async function RootLayout({
       <head>
         {process.env.ENVIRONMENT !== "development" ? (
           <>
+            <style
+              id="tailwind-ssr"
+              dangerouslySetInnerHTML={{ __html: bundleCss }}
+            ></style>
             <Script src="https://www.googletagmanager.com/gtag/js?id=G-X2L15MZPF3"></Script>
             <Script id="google-analytics">
               {`

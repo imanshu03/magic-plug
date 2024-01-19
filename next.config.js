@@ -23,6 +23,11 @@ const nextConfig = {
       },
     ];
   },
+  experimental: {
+    optimizeCss: true,
+  },
+  swcMinify: true,
+  optimizeFonts: true,
 };
 
 module.exports = nextConfig;
