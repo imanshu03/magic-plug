@@ -10,11 +10,11 @@ import Loader from "@/Atoms/Loader";
 const isDev = process.env.ENVIRONMENT === "development";
 export const revalidate = isDev ? 0 : 900;
 
-export async function generateMetadata({
+export function generateMetadata({
   params: { slug },
 }: {
   params: { slug: string };
-}): Promise<Metadata> {
+}): Metadata {
   return {
     title: `${convertSlugToName(slug)} | MagicPlug`,
   };
