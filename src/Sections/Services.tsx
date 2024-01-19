@@ -5,12 +5,12 @@ import gsap, { Power4 } from "gsap";
 import { SectionHeading } from "@/Atoms/Heading";
 import { useAnimation } from "@/hooks";
 import clsx from "clsx";
-import { ServiceCollection } from "@studio/types";
 import Link from "next/link";
 import { getPrefixedNumber } from "@/utils";
+import { SERVICES_TYPE } from "@/dataStore/services";
 
 interface Props {
-  data: ServiceCollection;
+  data: SERVICES_TYPE[];
 }
 
 const Services: React.FC<Props> = ({ data }) => {

@@ -22,64 +22,63 @@ type Contact = {
   link: string;
   priority: string;
   social: boolean;
+  description: string;
 };
 
-type DynamicPageSlugs = {
-  slug: {
-    title: string;
-    path: string;
-  };
-  mainPage: boolean;
-};
+// type DynamicPageSlugs = {
+//   slug: {
+//     title: string;
+//     path: string;
+//   };
+//   mainPage: boolean;
+// };
 
 type Clients = {
   name: string;
   image: any;
 };
 
-export type DynamicPageData = {
-  pageTitle: string;
-  description: any;
-  content: any;
-  image?: {
-    asset: any;
-    alt: string;
-    className?: string;
-    isInline: boolean;
-    after: boolean;
-  };
-  cta?: {
-    title: string;
-    slug: string;
-  };
-};
+// export type DynamicPageData = {
+//   pageTitle: string;
+//   description: any;
+//   content: any;
+//   image?: {
+//     asset: any;
+//     alt: string;
+//     className?: string;
+//     isInline: boolean;
+//     after: boolean;
+//   };
+//   cta?: {
+//     title: string;
+//     slug: string;
+//   };
+// };
 
-export type DynamicServicePageData = {
-  pageTitle: string;
-  description?: any;
-  cta?: {
-    title: string;
-    slug: string;
-  };
-  image?: {
-    asset: any;
-    alt: string;
-    className?: string;
-    isInline: boolean;
-    after: boolean;
-  };
-  servicesDescription?: any;
-  servicesProvided?: Array<{
-    heading: string;
-    description: string;
-  }>;
-};
-
-export type StatsSchema = {};
+// export type DynamicServicePageData = {
+//   pageTitle: string;
+//   description?: any;
+//   cta?: {
+//     title: string;
+//     slug: string;
+//   };
+//   image?: {
+//     asset: any;
+//     alt: string;
+//     className?: string;
+//     isInline: boolean;
+//     after: boolean;
+//   };
+//   servicesDescription?: any;
+//   servicesProvided?: Array<{
+//     heading: string;
+//     description: string;
+//   }>;
+// };
 
 export type ExpertiseCollection = Array<Expertise>;
-export type ServiceCollection = Array<Services>;
+// export type ServiceCollection = Array<Services>;
 export type ReferrerCollection = Array<Referrer>;
 export type ContactCollection = Array<Contact>;
-export type DynamicPageCollection = Array<DynamicPageSlugs>;
+// export type DynamicPageCollection = Array<DynamicPageSlugs>;
 export type ClientsCollection = Array<Clients>;

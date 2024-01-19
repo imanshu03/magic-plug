@@ -7,10 +7,11 @@ import fs from "fs";
 import clsx from "clsx";
 import Script from "next/script";
 import SmoothScrollWrapper from "../Components/SmoothScrollWrapper";
-import { getDynamicPages, getSocialLinks } from "@studio/queries";
+import { getSocialLinks } from "@studio/queries";
 import { LinkData } from "@/types";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { PAGE_DATA } from "@/dataStore/page";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -188,27 +189,12 @@ export default async function RootLayout({
   const cssPaths = path.resolve(currentPath, "css");
   appendScriptsToHead(cssPaths);
 
-  const [socialData, dynamicPageData] = await Promise.allSettled([
-    getSocialLinks(),
-    getDynamicPages(),
-  ]);
+  const socialData = await getSocialLinks();
   const linkData: LinkData["linkData"] = {
-    contact:
-      socialData.status === "fulfilled"
-        ? socialData.value.filter((e) => !e.social)
-        : [],
-    social:
-      socialData.status === "fulfilled"
-        ? socialData.value.filter((e) => e.social)
-        : [],
-    primaryPage:
-      dynamicPageData.status === "fulfilled"
-        ? dynamicPageData.value.filter((e) => e.mainPage)
-        : [],
-    secondaryPage:
-      dynamicPageData.status === "fulfilled"
-        ? dynamicPageData.value.filter((e) => !e.mainPage)
-        : [],
+    contact: socialData.filter((e) => !e.social),
+    social: socialData.filter((e) => e.social),
+    primaryPage: PAGE_DATA.filter((e) => e.mainPage),
+    secondaryPage: PAGE_DATA.filter((e) => !e.mainPage),
   };
 
   return (

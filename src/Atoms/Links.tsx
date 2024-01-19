@@ -30,6 +30,19 @@ export const CustomLink: React.FC<
   );
 };
 
+export const CustomNextLink: React.FC<{
+  href: string;
+  className?: string;
+  children: React.ReactNode;
+}> = ({ href, className, children }) => {
+  return (
+    <Link href={href} className={clsx(anchorClass, className)} prefetch>
+      {children}
+      {Arrows}
+    </Link>
+  );
+};
+
 export const NextLink: React.FC<{
   href: string;
   className?: string;

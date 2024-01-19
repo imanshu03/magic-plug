@@ -3,12 +3,8 @@ import { cache } from "react";
 import type {
   ClientsCollection,
   ContactCollection,
-  DynamicPageCollection,
-  DynamicPageData,
-  DynamicServicePageData,
   ExpertiseCollection,
   ReferrerCollection,
-  ServiceCollection,
 } from "./types";
 
 export const getExpertise = cache(async () => {
@@ -27,37 +23,21 @@ export const getExpertise = cache(async () => {
   }
 });
 
-export const getServices = async () => {
-  let result: ServiceCollection = [];
-  try {
-    const data = await sanityClient.fetch(`
-          *[_type == "services"]{
-              name,
-              description,
-              priority,
-              slug
-            } | order(priority desc)`);
-    result = data;
-  } finally {
-    return result;
-  }
-};
-
-export const getServiceData = async () => {
-  let result: ServiceCollection = [];
-  try {
-    const data = await sanityClient.fetch(`
-          *[_type == "services"]{
-              name,
-              description,
-              priority,
-              slug
-            } | order(priority desc)`);
-    result = data;
-  } finally {
-    return result;
-  }
-};
+// export const getServiceData = async () => {
+//   let result: ServiceCollection = [];
+//   try {
+//     const data = await sanityClient.fetch(`
+//           *[_type == "services"]{
+//               name,
+//               description,
+//               priority,
+//               slug
+//             } | order(priority desc)`);
+//     result = data;
+//   } finally {
+//     return result;
+//   }
+// };
 
 export const getReferrers = async () => {
   let result: ReferrerCollection = [];
@@ -81,7 +61,8 @@ export const getSocialLinks = async () => {
               name,
               link,
               social,
-              priority
+              priority,
+              description
             } | order(priority desc)`);
     result = data;
   } finally {
@@ -89,41 +70,41 @@ export const getSocialLinks = async () => {
   }
 };
 
-export const getDynamicPages = async () => {
-  let result: DynamicPageCollection = [];
-  try {
-    const data = await sanityClient.fetch(`
-            *[_type == "pages" && show == true]{
-              slug,
-              mainPage,
-              priority
-            } | order(priority desc)`);
-    result = data;
-  } finally {
-    return result;
-  }
-};
+// export const getDynamicPages = async () => {
+//   let result: DynamicPageCollection = [];
+//   try {
+//     const data = await sanityClient.fetch(`
+//             *[_type == "pages" && show == true]{
+//               slug,
+//               mainPage,
+//               priority
+//             } | order(priority desc)`);
+//     result = data;
+//   } finally {
+//     return result;
+//   }
+// };
 
-export const getPageData = async (slug: string) => {
-  let result: DynamicPageData | null = null;
+// export const getPageData = async (slug: string) => {
+//   let result: DynamicPageData | null = null;
 
-  try {
-    const data = await sanityClient.fetch(`
-            *[_type == "pages" && slug.path == "/${slug}"]{
-              content,
-              image,
-              pageTitle,
-              description,
-              cta,
-              footer
-            }`);
-    if (data.length) {
-      result = data[0];
-    }
-  } finally {
-    return result;
-  }
-};
+//   try {
+//     const data = await sanityClient.fetch(`
+//             *[_type == "pages" && slug.path == "/${slug}"]{
+//               content,
+//               image,
+//               pageTitle,
+//               description,
+//               cta,
+//               footer
+//             }`);
+//     if (data.length) {
+//       result = data[0];
+//     }
+//   } finally {
+//     return result;
+//   }
+// };
 
 export const getClients = async () => {
   let result: ClientsCollection = [];
@@ -141,23 +122,23 @@ export const getClients = async () => {
   }
 };
 
-export const getServicesPage = async (slug: string) => {
-  let result: DynamicServicePageData | null = null;
+// export const getServicesPage = async (slug: string) => {
+//   let result: DynamicServicePageData | null = null;
 
-  try {
-    const data = await sanityClient.fetch(`
-            *[_type == "servicesPage" && slug == "${slug}"]{
-              pageTitle,
-              description,
-              servicesDescription,
-              servicesProvided,
-              cta,
-              image
-            }`);
-    if (data.length) {
-      result = data[0];
-    }
-  } finally {
-    return result;
-  }
-};
+//   try {
+//     const data = await sanityClient.fetch(`
+//             *[_type == "servicesPage" && slug == "${slug}"]{
+//               pageTitle,
+//               description,
+//               servicesDescription,
+//               servicesProvided,
+//               cta,
+//               image
+//             }`);
+//     if (data.length) {
+//       result = data[0];
+//     }
+//   } finally {
+//     return result;
+//   }
+// };

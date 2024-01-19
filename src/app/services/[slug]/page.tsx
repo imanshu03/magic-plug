@@ -1,15 +1,19 @@
-import { PortableText } from "@portabletext/react";
-import { getServicesPage } from "@studio/queries";
 import clsx from "clsx";
 import React, { Suspense } from "react";
-import SlugPageLayout, {
-  portableTextComponents,
-} from "@/Components/SlugPageLayout";
+import SlugPageLayout from "@/Components/SlugPageLayout";
 import StarIcon from "@/Icons/Star";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { convertSlugToName } from "@/utils";
 import Loader from "@/Atoms/Loader";
+import {
+  SERVICES_DATA,
+  SERVICES_PAGE_DATA,
+  SERVICE_KEY_TYPE,
+} from "@/dataStore/services";
+import Divider from "@/Atoms/Divider";
+import { H3Heading } from "@/Atoms/Heading";
+import { CustomNextLink } from "@/Atoms/Links";
 
 const isDev = process.env.ENVIRONMENT === "development";
 export const revalidate = isDev ? 0 : 900;
@@ -25,14 +29,17 @@ export async function generateMetadata({
 }
 
 export default async function ServicesSlugPage({
-  params,
+  params: { slug },
 }: {
   params: { slug: string };
 }) {
-  const data = await getServicesPage(params.slug);
+  const data = SERVICES_PAGE_DATA[slug as SERVICE_KEY_TYPE];
 
   if (!data) notFound();
 
+  const otherServices = SERVICES_DATA.filter(
+    (e) => e.slug !== `/services/${slug}`
+  );
   return (
     <Suspense fallback={<Loader />}>
       <main
@@ -41,15 +48,7 @@ export default async function ServicesSlugPage({
           "pt-[68px] sm:pt-[76px] md:pt-[84px] lg:pt-[92px] xl:pt-[100px]"
         )}
       >
-        <SlugPageLayout data={data as any} slug={params.slug}>
-          {data.servicesDescription ? (
-            <article className="prose max-w-none prose-sm md:prose-lg lg:prose-xl text-dark-primary">
-              <PortableText
-                value={data.servicesDescription}
-                components={portableTextComponents}
-              />
-            </article>
-          ) : null}
+        <SlugPageLayout data={data as any}>
           {data.servicesProvided?.length ? (
             <div className="mt-6 md:mt-10 lg:mt-16 mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-x-9 md:gap-y-12 lg:gap-x-12 lg:gap-y-16">
               {data.servicesProvided.map((item, i) => (
@@ -70,6 +69,17 @@ export default async function ServicesSlugPage({
               ))}
             </div>
           ) : null}
+          <Divider margin fullWidth />
+          <article className="flex flex-col items-start justify-start prose max-w-none prose-sm md:prose-md lg:prose-lg text-dark-primary">
+            <H3Heading>Explore our other offered services:</H3Heading>
+            <ul>
+              {otherServices.map(({ name, slug }) => (
+                <li key={slug}>
+                  <CustomNextLink href={slug}>{name}</CustomNextLink>
+                </li>
+              ))}
+            </ul>
+          </article>
         </SlugPageLayout>
       </main>
     </Suspense>

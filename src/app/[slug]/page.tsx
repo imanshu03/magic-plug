@@ -1,4 +1,3 @@
-import { getPageData } from "@studio/queries";
 import clsx from "clsx";
 import React, { Suspense } from "react";
 import SlugPageLayout from "@/Components/SlugPageLayout";
@@ -6,6 +5,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { convertSlugToName } from "@/utils";
 import Loader from "@/Atoms/Loader";
+import { getPageData } from "@/dataStore/page";
 
 const isDev = process.env.ENVIRONMENT === "development";
 export const revalidate = isDev ? 0 : 900;
@@ -20,12 +20,8 @@ export async function generateMetadata({
   };
 }
 
-export default async function DynamicPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const data = await getPageData(params.slug);
+export default function DynamicPage({ params }: { params: { slug: string } }) {
+  const data = getPageData(params.slug);
 
   if (!data) notFound();
 
@@ -37,7 +33,7 @@ export default async function DynamicPage({
           "pt-[68px] sm:pt-[76px] md:pt-[84px] lg:pt-[92px] xl:pt-[100px]"
         )}
       >
-        <SlugPageLayout data={data} slug={params.slug} />
+        <SlugPageLayout data={data} />
       </main>
     </Suspense>
   );

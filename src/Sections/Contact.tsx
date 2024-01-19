@@ -6,9 +6,10 @@ import Input from "@/Atoms/Input";
 import Radio from "@/Atoms/Radio";
 import TextArea from "@/Atoms/TextArea";
 import { CustomLink } from "@/Atoms/Links";
-import { ReferrerCollection, ServiceCollection } from "@studio/types";
+import { ContactCollection, ReferrerCollection } from "@studio/types";
 import { Button } from "@/Atoms/Button";
 import { toast } from "react-toastify";
+import { SERVICES_TYPE } from "@/dataStore/services";
 
 interface FormInputs {
   name: string;
@@ -20,11 +21,12 @@ interface FormInputs {
 }
 
 interface Props {
-  services: ServiceCollection;
   referrers: ReferrerCollection;
+  services: SERVICES_TYPE[];
+  socialLinks: ContactCollection;
 }
 
-const Contact: React.FC<Props> = ({ services, referrers }) => {
+const Contact: React.FC<Props> = ({ referrers, services, socialLinks }) => {
   const [loading, setLoading] = useState(false);
   const {
     register,
@@ -171,16 +173,26 @@ const Contact: React.FC<Props> = ({ services, referrers }) => {
           />
         </div>
         <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between text-sm md:text-[0.6em] mt-8">
-          <div className="flex flex-col mt-3 md:mt-0 items-center md:items-start justify-start order-2 md:order-1">
-            <p>Don&apos;t like the forms?</p>
-            <div className="flex flex-col md:flex-row items-center justify-start md:mt-2">
-              <CustomLink href="mailto:hello@magicplug.tech">
-                Drop us a mail on hello@magicplug.tech
-              </CustomLink>
-              {/* <span className="mx-4">or</span>
-              <CustomLink href="">contact us on whatsapp</CustomLink> */}
+          {socialLinks.length ? (
+            <div className="flex flex-col mt-3 md:mt-0 items-center md:items-start justify-start order-2 md:order-1">
+              <p>Don&apos;t like the forms?</p>
+              <div className="flex flex-col md:flex-row items-center justify-start md:mt-2">
+                {socialLinks.map(({ name, description, link }, index) => (
+                  <>
+                    <CustomLink href={link} key={index}>
+                      {description || name}
+                    </CustomLink>
+                    {index !== socialLinks.length - 1 ? (
+                      <span className="mx-4">or</span>
+                    ) : null}
+                  </>
+                ))}
+              </div>
             </div>
-          </div>
+          ) : (
+            <div />
+          )}
+
           <Button
             type="submit"
             className="order-1 md:order-2"

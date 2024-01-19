@@ -9,30 +9,34 @@ import {
   getClients,
   getExpertise,
   getReferrers,
-  getServices,
+  getSocialLinks,
 } from "@studio/queries";
 import Clients from "@/Sections/Clients";
 import { Suspense } from "react";
 import Loader from "@/Atoms/Loader";
+import { SERVICES_DATA } from "@/dataStore/services";
 
 const isDev = process.env.ENVIRONMENT === "development";
 export const revalidate = isDev ? 0 : 900;
 
 export default async function Home() {
-  const [expertise, services, referrers, clients] = await Promise.allSettled([
+  const [expertise, socials, referrers, clients] = await Promise.allSettled([
     getExpertise(),
-    getServices(),
+    getSocialLinks(),
     getReferrers(),
     getClients(),
   ]);
 
   const contactPageProps = {
-    services: services.status === "fulfilled" ? services.value : [],
+    services: SERVICES_DATA,
     referrers: referrers.status === "fulfilled" ? referrers.value : [],
+    socialLinks:
+      socials.status === "fulfilled"
+        ? socials.value.filter((e) => !e.social)
+        : [],
   };
 
   const expertiseData = expertise.status === "fulfilled" ? expertise.value : [];
-  const servicesData = services.status === "fulfilled" ? services.value : [];
   const clientsData = clients.status === "fulfilled" ? clients.value : [];
 
   return (
@@ -49,7 +53,7 @@ export default async function Home() {
         <Divider />
         <Carousel />
         <Divider />
-        {servicesData.length ? <Services data={servicesData} /> : null}
+        <Services data={SERVICES_DATA} />
         {clientsData.length ? (
           <>
             <Divider margin direction="down" />
