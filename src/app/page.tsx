@@ -10,6 +10,7 @@ import {
   getExpertise,
   getReferrers,
   getServices,
+  getSocialLinks,
 } from "@studio/queries";
 import Clients from "@/Sections/Clients";
 import { Suspense } from "react";
@@ -19,16 +20,22 @@ const isDev = process.env.ENVIRONMENT === "development";
 export const revalidate = isDev ? 0 : 900;
 
 export default async function Home() {
-  const [expertise, services, referrers, clients] = await Promise.allSettled([
-    getExpertise(),
-    getServices(),
-    getReferrers(),
-    getClients(),
-  ]);
+  const [expertise, services, referrers, clients, socials] =
+    await Promise.allSettled([
+      getExpertise(),
+      getServices(),
+      getReferrers(),
+      getClients(),
+      getSocialLinks(),
+    ]);
 
   const contactPageProps = {
     services: services.status === "fulfilled" ? services.value : [],
     referrers: referrers.status === "fulfilled" ? referrers.value : [],
+    socialLinks:
+      socials.status === "fulfilled"
+        ? socials.value.filter((e) => !e.social)
+        : [],
   };
 
   const expertiseData = expertise.status === "fulfilled" ? expertise.value : [];

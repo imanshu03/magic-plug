@@ -22,6 +22,7 @@ type Contact = {
   link: string;
   priority: string;
   social: boolean;
+  description: string;
 };
 
 type DynamicPageSlugs = {

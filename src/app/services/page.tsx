@@ -3,7 +3,7 @@ import clsx from "clsx";
 import React, { Suspense } from "react";
 import { getPrefixedNumber } from "@/utils";
 import StarIcon from "@/Icons/Star";
-import { CustomLink } from "@/Atoms/Links";
+import { CustomNextLink } from "@/Atoms/Links";
 import SlugPageLayout from "@/Components/SlugPageLayout";
 import { Metadata } from "next";
 import Loader from "@/Atoms/Loader";
@@ -53,9 +53,9 @@ export default async function ServicesPage() {
                       {item.description}
                     </p>
                     <div className="grow" />
-                    <CustomLink href={item.slug} className="mt-2 self-end">
+                    <CustomNextLink href={item.slug} className="mt-2 self-end">
                       know more
-                    </CustomLink>
+                    </CustomNextLink>
                   </div>
                 </div>
               ))}
