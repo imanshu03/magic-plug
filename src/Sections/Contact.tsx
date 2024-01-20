@@ -13,6 +13,7 @@ import {
 } from "@studio/types";
 import { Button } from "@/Atoms/Button";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 interface FormInputs {
   name: string;
@@ -52,21 +53,26 @@ const Contact: React.FC<Props> = ({ services, referrers, socialLinks }) => {
   const onFormSubmit = async (e: FormInputs) => {
     setLoading(true);
     try {
-      await fetch("/api/send-mail", {
-        method: "POST",
-        body: JSON.stringify(e),
+      await axios.post("/api/save-lead", e, {
+        headers: {
+          "content-type": "application/json",
+        },
+      });
+      await axios.post("/api/send-mail", e, {
         headers: {
           "content-type": "application/json",
         },
       });
       if (window.trackGAEvent)
-        window.trackGAEvent("event", "lead_client_info", e);
+        window.trackGAEvent("event", "lead_client_info_success", e);
       toast.success(
         "We have received your message. We will reach out to you in next 24 hours."
       );
       reset();
       clearErrors();
-    } catch {
+    } catch (error) {
+      if (window.trackGAEvent)
+        window.trackGAEvent("event", "lead_client_info_error", error);
       toast.error("Something went wrong, Please try again.");
     } finally {
       setLoading(false);
