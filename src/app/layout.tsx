@@ -109,6 +109,48 @@ export const metadata: Metadata = {
       sizes: "16x16",
       url: "/favicons/favicon-16x16.png",
     },
+    {
+      rel: "favicon",
+      type: "image/ico",
+      sizes: "16x16",
+      url: "/favicon-16x16.ico",
+    },
+    {
+      rel: "favicon",
+      type: "image/ico",
+      sizes: "32x32",
+      url: "/favicon-32x32.ico",
+    },
+    {
+      rel: "favicon",
+      type: "image/ico",
+      sizes: "48x48",
+      url: "/favicon-48x48.ico",
+    },
+    {
+      rel: "favicon",
+      type: "image/ico",
+      sizes: "96x96",
+      url: "/favicon-96x96.ico",
+    },
+    {
+      rel: "favicon",
+      type: "image/ico",
+      sizes: "144x144",
+      url: "/favicon-144x144.ico",
+    },
+    {
+      rel: "favicon",
+      type: "image/ico",
+      sizes: "192x192",
+      url: "/favicon-192x192.ico",
+    },
+    {
+      rel: "favicon",
+      type: "image/ico",
+      sizes: "240x240",
+      url: "/favicon-240x240.ico",
+    },
   ],
   manifest: "/manifest.json",
   other: {
