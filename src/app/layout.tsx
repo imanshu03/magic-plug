@@ -7,6 +7,7 @@ import SmoothScrollWrapper from "../Components/SmoothScrollWrapper";
 import { getDynamicPages, getSocialLinks } from "@studio/queries";
 import { LinkData } from "@/types";
 import { ToastContainer } from "react-toastify";
+import { Analytics } from "@vercel/analytics/react";
 
 import "./globals.css";
 import bundleCss from "!raw-loader!./output.css";
@@ -116,10 +117,10 @@ export const metadata: Metadata = {
       "Magic Plug Concepts Private Limited: Your trusted software development company in transforming ideas into cutting-edge digital solutions.",
     images: [
       {
-        url: "/android-chrome-512x512.png",
+        url: "https://magicplug.tech/card.png",
         type: "image/png",
-        width: 512,
-        height: 512,
+        width: 2000,
+        height: 1046,
       },
     ],
     countryName: "India",
@@ -130,13 +131,14 @@ export const metadata: Metadata = {
     description:
       "Magic Plug Concepts Private Limited: Your trusted software development company in transforming ideas into cutting-edge digital solutions.",
     creator: "@magicplug_tech",
+    site: "@magicplug_tech",
     card: "summary_large_image",
     images: [
       {
-        url: "/android-chrome-512x512.png",
+        url: "https://magicplug.tech/card.png",
         type: "image/png",
-        width: 512,
-        height: 512,
+        width: 2000,
+        height: 1046,
       },
     ],
   },
@@ -208,6 +210,7 @@ export default async function RootLayout({
           {children}
         </SmoothScrollWrapper>
         <div id="menu-portal"></div>
+        <Analytics />
       </body>
     </html>
   );
