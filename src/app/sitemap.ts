@@ -15,6 +15,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      url: "https://magicplug.tech/contact-us",
+      lastModified: new Date(),
+      changeFrequency: "yearly",
+      priority: 0.7,
+    },
+    {
       url: "https://magicplug.tech/services/staff-augmentation",
       lastModified: new Date(),
       changeFrequency: "monthly",
