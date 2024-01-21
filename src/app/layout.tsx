@@ -107,7 +107,6 @@ export const metadata: Metadata = {
     viewportFit: "contain",
   },
   themeColor: "#F5F5F5",
-  robots: "https://magicplug.tech",
 };
 
 export default async function RootLayout({
