@@ -34,62 +34,8 @@ export const metadata: Metadata = {
     {
       rel: "apple-touch-icon",
       type: "image/png",
-      sizes: "57x57",
-      url: "/apple-icon-57x57.png",
-    },
-    {
-      rel: "apple-touch-icon",
-      type: "image/png",
-      sizes: "60x60",
-      url: "/apple-icon-60x60.png",
-    },
-    {
-      rel: "apple-touch-icon",
-      type: "image/png",
-      sizes: "72x72",
-      url: "/apple-icon-72x72.png",
-    },
-    {
-      rel: "apple-touch-icon",
-      type: "image/png",
-      sizes: "76x76",
-      url: "/apple-icon-76x76.png",
-    },
-    {
-      rel: "apple-touch-icon",
-      type: "image/png",
-      sizes: "114x114",
-      url: "/apple-icon-114x114.png",
-    },
-    {
-      rel: "apple-touch-icon",
-      type: "image/png",
-      sizes: "120x120",
-      url: "/apple-icon-120x120.png",
-    },
-    {
-      rel: "apple-touch-icon",
-      type: "image/png",
-      sizes: "144x144",
-      url: "/apple-icon-144x144.png",
-    },
-    {
-      rel: "apple-touch-icon",
-      type: "image/png",
-      sizes: "152x152",
-      url: "/apple-icon-152x152.png",
-    },
-    {
-      rel: "apple-touch-icon",
-      type: "image/png",
       sizes: "180x180",
-      url: "/apple-icon-180x180.png",
-    },
-    {
-      rel: "icon",
-      type: "image/png",
-      sizes: "192x192",
-      url: "/android-icon-192x192.png",
+      url: "/apple-touch-icon.png",
     },
     {
       rel: "icon",
@@ -100,26 +46,13 @@ export const metadata: Metadata = {
     {
       rel: "icon",
       type: "image/png",
-      sizes: "96x96",
-      url: "/favicon-96x96.png",
-    },
-    {
-      rel: "icon",
-      type: "image/png",
       sizes: "16x16",
       url: "/favicon-16x16.png",
     },
-    {
-      rel: "favicon",
-      type: "image/x-icon",
-      sizes: "any",
-      url: "/favicon.ico",
-    },
   ],
-  manifest: "/manifest.json",
   other: {
-    "msapplication-TileColor": "#F5F5F5",
-    "msapplication-TileImage": "/ms-icon-144x144.png",
+    "msapplication-TileColor": "#0D0D0D",
+    "msapplication-TileImage": "/mstile-150x150.png",
   },
   keywords: [
     "MagicPlug Tech",
