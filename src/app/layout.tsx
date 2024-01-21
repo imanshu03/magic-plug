@@ -107,6 +107,39 @@ export const metadata: Metadata = {
     viewportFit: "contain",
   },
   themeColor: "#F5F5F5",
+  openGraph: {
+    type: "website",
+    url: "https://magicplug.tech",
+    siteName: "MagicPlug Concepts",
+    title: "MagicPlug Concepts",
+    description:
+      "Magic Plug Concepts Private Limited: Your trusted software development company in transforming ideas into cutting-edge digital solutions.",
+    images: [
+      {
+        url: "/android-chrome-512x512.png",
+        type: "image/png",
+        width: 512,
+        height: 512,
+      },
+    ],
+    countryName: "India",
+    emails: "hello@magicplug.tech",
+  },
+  twitter: {
+    title: "MagicPlug Concepts",
+    description:
+      "Magic Plug Concepts Private Limited: Your trusted software development company in transforming ideas into cutting-edge digital solutions.",
+    creator: "@magicplug_tech",
+    card: "summary_large_image",
+    images: [
+      {
+        url: "/android-chrome-512x512.png",
+        type: "image/png",
+        width: 512,
+        height: 512,
+      },
+    ],
+  },
 };
 
 export default async function RootLayout({
