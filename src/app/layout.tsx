@@ -215,7 +215,7 @@ export default async function RootLayout({
               id="tailwind-ssr"
               dangerouslySetInnerHTML={{ __html: bundleCss }}
             ></style>
-            <Script src="https://www.googletagmanager.com/gtag/js?id=G-X2L15MZPF3"></Script>
+            {/* <Script src="https://www.googletagmanager.com/gtag/js?id=G-X2L15MZPF3"></Script>
             <Script id="google-analytics">
               {`
                 window.dataLayer = window.dataLayer || [];
@@ -227,7 +227,7 @@ export default async function RootLayout({
     
                 gtag("config", "G-X2L15MZPF3");
               `}
-            </Script>
+            </Script> */}
             <Script id="gtm">
               {`
                 (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
