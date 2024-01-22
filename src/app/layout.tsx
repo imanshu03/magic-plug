@@ -7,7 +7,6 @@ import SmoothScrollWrapper from "../Components/SmoothScrollWrapper";
 import { getDynamicPages, getSocialLinks } from "@studio/queries";
 import { LinkData } from "@/types";
 import { ToastContainer } from "react-toastify";
-import { Analytics } from "@vercel/analytics/react";
 
 import "./globals.css";
 import bundleCss from "!raw-loader!./output.css";
@@ -215,7 +214,6 @@ export default async function RootLayout({
           {children}
         </SmoothScrollWrapper>
         <div id="menu-portal"></div>
-        <Analytics />
       </body>
     </html>
   );
