@@ -1,9 +1,10 @@
+"use client";
 import React from "react";
 
 const ClutchLogo = () => {
   return (
     <iframe
-      src="https://widget.clutch.co/widgets/get/2?ref_domain=localhost&uid=2307505&rel_nofollow=true&ref_path=/"
+      src="https://widget.clutch.co/widgets/get/2?ref_domain=magicplug.tech&uid=2307505&rel_nofollow=true&ref_path=/"
       allowFullScreen={false}
       width={190}
       height={45}
