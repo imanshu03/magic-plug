@@ -27,7 +27,7 @@ const hurricane = Hurricane({
 });
 
 export const metadata: Metadata = {
-  title: "MagicPlug Concepts",
+  title: "MagicPlug Concepts | Software Development Company",
   description:
     "Magic Plug Concepts Private Limited: Your trusted software development company in transforming ideas into cutting-edge digital solutions.",
   icons: [
@@ -51,8 +51,13 @@ export const metadata: Metadata = {
     },
     {
       rel: "icon",
+      type: "image/x-icon",
+      url: "/favicon.ico",
+    },
+    {
+      rel: "shortcut icon",
       type: "image/png",
-      url: "favicon.ico",
+      url: "/favicon-32x32.png",
     },
   ],
   other: {
