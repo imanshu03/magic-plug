@@ -52,7 +52,8 @@ export const metadata: Metadata = {
     },
     {
       rel: "icon",
-      url: "/favicon.ico",
+      type: "image/png",
+      url: "favicon.ico",
     },
   ],
   other: {
