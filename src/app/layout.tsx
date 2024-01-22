@@ -50,6 +50,10 @@ export const metadata: Metadata = {
       sizes: "16x16",
       url: "/favicon-16x16.png",
     },
+    {
+      rel: "icon",
+      url: "/favicon.ico",
+    },
   ],
   other: {
     "msapplication-TileColor": "#0D0D0D",
