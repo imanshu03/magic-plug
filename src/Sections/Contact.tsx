@@ -52,6 +52,7 @@ const Contact: React.FC<Props> = ({ services, referrers, socialLinks }) => {
 
   const onFormSubmit = async (e: FormInputs) => {
     setLoading(true);
+    window.trackGAEvent?.("event", "form_data_sending_initiate");
     try {
       await axios.post("/api/save-lead", e, {
         headers: {
@@ -63,16 +64,19 @@ const Contact: React.FC<Props> = ({ services, referrers, socialLinks }) => {
           "content-type": "application/json",
         },
       });
-      if (window.trackGAEvent)
-        window.trackGAEvent("event", "lead_client_info_success", e);
+      window.trackGAEvent?.("event", "lead_client_info_success", {
+        ...e,
+      });
+
       toast.success(
         "We have received your message. We will reach out to you in next 24 hours."
       );
       reset();
       clearErrors();
     } catch (error) {
-      if (window.trackGAEvent)
-        window.trackGAEvent("event", "lead_client_info_error", error);
+      window.trackGAEvent?.("event", "lead_client_info_error", {
+        ...e,
+      });
       toast.error("Something went wrong, Please try again.");
     } finally {
       setLoading(false);
