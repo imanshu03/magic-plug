@@ -21,8 +21,7 @@ MagicPlug is your trusted partner in transforming ideas into cutting-edge digita
 3. UI/UX Design
 4. Quality Assurance
 5. Marketing Automation
-6. Salesforce Consultancy
-7. SEO/PPC services
+6. Staff Augmentation
 
 🤝 Let's Transform Your Vision into Reality!
 
