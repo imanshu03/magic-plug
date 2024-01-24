@@ -47,7 +47,7 @@ export const SectionHeading: React.FC<{
 
 export const H1Heading: FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <h1 className="text-2xl sm:text-3xl md:text-4xl xl:text-6xl leading-tight font-semibold">
+    <h1 className="text-2xl sm:text-3xl md:text-4xl xl:text-6xl !leading-tight font-semibold">
       {children}
     </h1>
   );
@@ -55,7 +55,7 @@ export const H1Heading: FC<{ children: React.ReactNode }> = ({ children }) => {
 
 export const H2Heading: FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <h2 className="text-xl sm:text-2xl md:text-3xl xl:text-5xl leading-tight font-semibold">
+    <h2 className="text-xl sm:text-2xl md:text-3xl xl:text-5xl !leading-tight font-semibold">
       {children}
     </h2>
   );
