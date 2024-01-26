@@ -1,7 +1,5 @@
 "use client";
-import React, { useEffect, useRef } from "react";
-import gsap, { Power4 } from "gsap";
-
+import React, { useEffect, useRef, useState } from "react";
 import { SectionHeading } from "@/Atoms/Heading";
 import { useAnimation } from "@/hooks";
 import clsx from "clsx";
@@ -18,32 +16,43 @@ const Services: React.FC<Props> = ({ data }) => {
   const scrollParentRef = useRef<HTMLDivElement>(null);
   const scrollerRef = useRef<HTMLDivElement>(null);
   const mainTimeline = useRef<GSAPTimeline>();
+  const [fallback, setFallback] = useState(false);
 
-  const addScrollAnimation = () => {
-    mainTimeline.current?.clear();
-    mainTimeline.current?.kill();
-    mainTimeline.current = gsap.timeline({
-      scrollTrigger: {
-        trigger: parentRef.current,
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 0.7,
-        markers: false,
-      },
-    });
+  const addScrollAnimation = async () => {
+    try {
+      const { gsap, Power4 } = await import("gsap");
+      const { ScrollTrigger } = await import("gsap/dist/ScrollTrigger");
+      gsap.registerPlugin(ScrollTrigger);
 
-    const { scrollWidth, clientWidth } = scrollParentRef.current!;
+      mainTimeline.current?.clear();
+      mainTimeline.current?.kill();
+      mainTimeline.current = gsap.timeline({
+        scrollTrigger: {
+          trigger: parentRef.current,
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 0.7,
+          markers: false,
+        },
+      });
 
-    mainTimeline.current.fromTo(
-      scrollerRef.current,
-      {
-        x: "0",
-        ease: Power4.easeInOut,
-      },
-      {
-        x: -(scrollWidth - clientWidth),
-      }
-    );
+      const { scrollWidth, clientWidth } = scrollParentRef.current!;
+
+      mainTimeline.current.fromTo(
+        scrollerRef.current,
+        {
+          x: "0",
+          ease: Power4.easeInOut,
+        },
+        {
+          x: -(scrollWidth - clientWidth),
+        }
+      );
+      setFallback(false);
+    } catch {
+      addStaticAnimation();
+      setFallback(true);
+    }
   };
 
   const addStaticAnimation = () => {
@@ -63,11 +72,14 @@ const Services: React.FC<Props> = ({ data }) => {
 
   return (
     <section
-      className="w-screen h-auto md:h-[400vh] relative"
+      className={clsx(
+        "w-screen h-auto relative",
+        fallback ? "" : "md:h-[400vh]"
+      )}
       id="services"
       ref={parentRef}
     >
-      <div className="w-full h-auto min-h-screen md:h-screen flex flex-col items-center justify-center sticky top-0 left-0 overflow-hidden md:px-[5vw] lg:px-[10vw]">
+      <div className="w-full h-auto py-16 md:py-0 md:min-h-screen md:h-screen flex flex-col items-center justify-center sticky top-0 left-0 overflow-hidden md:px-[5vw] lg:px-[10vw]">
         <SectionHeading
           heading="Our services"
           className="w-full items-center px-[5vw] md:px-0"
@@ -78,9 +90,12 @@ const Services: React.FC<Props> = ({ data }) => {
         <div className="w-full mt-6 md:mt-10 lg:mt-16" ref={scrollParentRef}>
           <div
             className={clsx(
-              "w-full flex flex-nowrap items-stretch justify-start overflow-x-auto md:overflow-visible",
-              "pl-[5vw] md:pl-0 scrollbar-hide scroll-px-[5vw] snap-x snap-mandatory md:scroll-px-0 md:snap-none",
-              "[&>*:nth-last-child(1)]:mr-[5vw] md:[&>*:nth-last-child(1)]:mr-0"
+              "w-full flex flex-nowrap items-stretch justify-start overflow-x-auto",
+              "pl-[5vw] scrollbar-hide scroll-px-[5vw] snap-x snap-mandatory",
+              "[&>*:nth-last-child(1)]:mr-[5vw]",
+              fallback
+                ? "md:overflow-x-auto md:pl-[10vw] md:scroll-px-[10vw] md:snap-x md:[&>*:nth-last-child(1)]:mr-[10vw]"
+                : "md:overflow-visible md:pl-0 md:scroll-px-0 md:snap-none md:[&>*:nth-last-child(1)]:mr-0"
             )}
             ref={scrollerRef}
           >

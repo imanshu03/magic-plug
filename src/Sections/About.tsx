@@ -1,10 +1,6 @@
 "use client";
-import React, { Fragment, useEffect, useRef } from "react";
-import gsap, { Power4 } from "gsap";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import { TextPlugin } from "gsap/dist/TextPlugin";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import clsx from "clsx";
-import lottie from "lottie-web";
 import { ColoredHeading } from "@/Atoms/Heading";
 import { useAnimation } from "@/hooks";
 
@@ -24,36 +20,44 @@ const About = () => {
   const absoluteTextRef = useRef<HTMLDivElement>(null);
   const lottieRef = useRef<HTMLDivElement>(null);
   const mainTimeline = useRef<GSAPTimeline>();
+  const [fallback, setFallback] = useState(false);
 
-  const addScrollAnimation = () => {
-    mainTimeline.current?.kill();
+  const addScrollAnimation = async () => {
+    try {
+      const { gsap, Power4 } = await import("gsap");
+      const { ScrollTrigger } = await import("gsap/dist/ScrollTrigger");
+      mainTimeline.current?.kill();
 
-    gsap.registerPlugin(ScrollTrigger);
-    gsap.registerPlugin(TextPlugin);
+      gsap.registerPlugin(ScrollTrigger);
 
-    mainTimeline.current = gsap.timeline({
-      scrollTrigger: {
-        trigger: scrollerRef.current,
-        start: "top center",
-        end: "bottom bottom",
-        scrub: 0.7,
-        markers: false,
-      },
-    });
-
-    document.querySelectorAll(".animate-chars").forEach((el, i) => {
-      mainTimeline.current?.fromTo(
-        el,
-        {
-          autoAlpha: 0,
-          ease: Power4.easeOut,
+      mainTimeline.current = gsap.timeline({
+        scrollTrigger: {
+          trigger: scrollerRef.current,
+          start: "top center",
+          end: "bottom bottom",
+          scrub: 0.7,
+          markers: false,
         },
-        {
-          autoAlpha: 1,
-        },
-        ">"
-      );
-    });
+      });
+
+      document.querySelectorAll(".animate-chars").forEach((el, i) => {
+        mainTimeline.current?.fromTo(
+          el,
+          {
+            autoAlpha: 0,
+            ease: Power4.easeOut,
+          },
+          {
+            autoAlpha: 1,
+          },
+          ">"
+        );
+      });
+      setFallback(false);
+    } catch {
+      addStaticAnimation();
+      setFallback(true);
+    }
   };
 
   const addStaticAnimation = () => {
@@ -63,34 +67,40 @@ const About = () => {
   useAnimation(addScrollAnimation, addStaticAnimation);
 
   useEffect(() => {
-    const animation = lottie.loadAnimation({
-      container: lottieRef.current!,
-      renderer: "svg",
-      autoplay: true,
-      loop: true,
-      path: "/assets/lottie/Building.json",
+    let animation: any;
+    import("lottie-web").then((module) => {
+      const lottie = module.default;
+      animation = lottie.loadAnimation({
+        container: lottieRef.current!,
+        renderer: "svg",
+        autoplay: true,
+        loop: true,
+        path: "/assets/lottie/Building.json",
+      });
     });
 
     return () => {
-      animation.destroy();
+      animation?.destroy();
+      mainTimeline.current?.kill();
     };
   }, []);
-
-  useEffect(
-    () => () => {
-      mainTimeline.current?.kill();
-    },
-    []
-  );
 
   return (
     <section className="bg-app-bg w-screen px-[5vw] lg:px-[10vw]">
       <div
-        className="h-auto md:h-[200vh] w-full box-border relative"
+        className={clsx(
+          "h-auto w-full box-border relative",
+          fallback ? "md:h-screen" : "md:h-[200vh]"
+        )}
         ref={scrollerRef}
       >
-        <div className="h-auto pb-[30vh] md:pb-0 md:h-screen w-full sticky top-0 left-0 flex flex-col items-center justify-center">
-          <div className="block md:hidden h-auto">
+        <div className="h-auto pb-16 md:pb-0 md:h-screen w-full sticky top-0 left-0 flex flex-col items-center justify-center">
+          <div
+            className={clsx(
+              "block h-auto",
+              fallback ? "md:block" : "md:hidden"
+            )}
+          >
             <h1 className={clsx("text-dark-primary", commonTextClass)}>
               {logo}&nbsp;{text1.split(" ").slice(1).join(" ")}
             </h1>
@@ -98,7 +108,8 @@ const About = () => {
           <h1
             className={clsx(
               "hidden md:block w-full h-auto text-dark-primary/10 relative",
-              commonTextClass
+              commonTextClass,
+              fallback ? "md:hidden" : "md:block"
             )}
           >
             {text1.split(" ").map((word, i) => (
@@ -139,7 +150,7 @@ const About = () => {
         </div>
         <div
           ref={lottieRef}
-          className="h-auto w-full md:h-full md:w-auto shrink-0 order-1 md:order-2 [&>svg]:rounded-[12px_12px_0px_0px] md:[&>svg]:rounded-[0px_12px_12px_0px]"
+          className="h-auto w-full md:h-full md:w-auto shrink-0 order-1 md:order-2 [&>svg]:rounded-[12px_12px_0px_0px] md:[&>svg]:rounded-[0px_12px_12px_0px] aspect-square"
         />
       </div>
     </section>

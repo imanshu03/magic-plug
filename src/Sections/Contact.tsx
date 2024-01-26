@@ -65,7 +65,8 @@ const Contact: React.FC<Props> = ({ services, referrers, socialLinks }) => {
         },
       });
       window.trackGAEvent?.("event", "lead_client_info_success", {
-        ...e,
+        event_email: e.contact,
+        event_name: e.name,
       });
 
       toast.success(
@@ -75,7 +76,8 @@ const Contact: React.FC<Props> = ({ services, referrers, socialLinks }) => {
       clearErrors();
     } catch (error) {
       window.trackGAEvent?.("event", "lead_client_info_error", {
-        ...e,
+        event_email: e.contact,
+        event_name: e.name,
       });
       toast.error("Something went wrong, Please try again.");
     } finally {

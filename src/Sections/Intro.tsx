@@ -1,10 +1,8 @@
 "use client";
-import React, { useEffect, useRef } from "react";
-import gsap, { Power4 } from "gsap";
-import ScrollTrigger from "gsap/dist/ScrollTrigger";
-import { ScrollLottie } from "@/utils";
-import lottie, { AnimationItem } from "lottie-web";
+import React, { useEffect, useRef, useState } from "react";
+import type { AnimationItem } from "lottie-web";
 import { useAnimation } from "@/hooks";
+import clsx from "clsx";
 
 const Intro = () => {
   const scrollerRef = useRef<HTMLDivElement>(null);
@@ -13,58 +11,80 @@ const Intro = () => {
   const mainTimeline = useRef<GSAPTimeline>();
   const scrollTimeline = useRef<GSAPTimeline>();
   const animation = useRef<AnimationItem>();
+  const [fallback, setFallback] = useState(false);
 
-  const addScrollAnimation = () => {
-    mainTimeline.current?.kill();
-    scrollTimeline.current?.kill();
-    animation.current?.destroy();
+  const addScrollAnimation = async () => {
+    try {
+      const { gsap, Power4 } = await import("gsap");
+      const { ScrollTrigger } = await import("gsap/dist/ScrollTrigger");
+      gsap.registerPlugin(ScrollTrigger);
 
-    gsap.registerPlugin(ScrollTrigger);
-    mainTimeline.current = gsap.timeline({
-      scrollTrigger: {
-        trigger: scrollerRef.current,
+      mainTimeline.current?.kill();
+      scrollTimeline.current?.kill();
+      animation.current?.destroy();
+
+      gsap.registerPlugin(ScrollTrigger);
+      mainTimeline.current = gsap.timeline({
+        scrollTrigger: {
+          trigger: scrollerRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: 0.7,
+          markers: false,
+        },
+      });
+
+      mainTimeline.current.fromTo(
+        textMoverRef.current,
+        {
+          y: "0",
+          ease: Power4.easeOut,
+        },
+        {
+          y: "-100px",
+        }
+      );
+
+      const { ScrollLottie } = await import("@/utils");
+
+      const response = ScrollLottie({
+        scrollTarget: scrollerRef.current!,
+        lottieTarget: lottieRef.current!,
         start: "top top",
         end: "bottom top",
-        scrub: 0.7,
-        markers: false,
-      },
-    });
-
-    mainTimeline.current.fromTo(
-      textMoverRef.current,
-      {
-        y: "0",
-        ease: Power4.easeOut,
-      },
-      {
-        y: "-100px",
-      }
-    );
-
-    const response = ScrollLottie({
-      scrollTarget: scrollerRef.current!,
-      lottieTarget: lottieRef.current!,
-      start: "top top",
-      end: "bottom top",
-      path: "/assets/lottie/Intro.json",
-    });
-    animation.current = response.animation;
-    scrollTimeline.current = response.timeline;
+        path: "/assets/lottie/Intro.json",
+      });
+      animation.current = response.animation;
+      scrollTimeline.current = response.timeline;
+      setFallback(false);
+    } catch {
+      mainTimeline.current?.kill();
+      scrollTimeline.current?.kill();
+      animation.current?.destroy();
+      textMoverRef.current?.removeAttribute("style");
+      setFallback(true);
+    }
   };
 
-  const addStaticAnimation = () => {
-    textMoverRef.current?.removeAttribute("style");
-    mainTimeline.current?.kill();
-    scrollTimeline.current?.kill();
-    animation.current?.destroy();
+  const addStaticAnimation = async () => {
+    try {
+      const lottie = (await import("lottie-web")).default;
+      textMoverRef.current?.removeAttribute("style");
+      mainTimeline.current?.kill();
+      scrollTimeline.current?.kill();
+      animation.current?.destroy();
 
-    animation.current = lottie.loadAnimation({
-      container: lottieRef.current!,
-      renderer: "svg",
-      loop: true,
-      autoplay: true,
-      path: "/assets/lottie/Intro.json",
-    });
+      animation.current = lottie.loadAnimation({
+        container: lottieRef.current!,
+        renderer: "svg",
+        loop: true,
+        autoplay: true,
+        path: "/assets/lottie/Intro.json",
+      });
+      setFallback(false);
+    } catch {
+      setFallback(true);
+    }
   };
 
   useAnimation(addScrollAnimation, addStaticAnimation);
@@ -98,7 +118,10 @@ const Intro = () => {
         </h1>
       </div>
       <div
-        className="h-full w-full max-h-screen absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[0] opacity-30"
+        className={clsx(
+          "h-full w-full max-h-screen absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[0] opacity-30",
+          fallback ? "hidden" : "block"
+        )}
         ref={lottieRef}
       />
     </section>
