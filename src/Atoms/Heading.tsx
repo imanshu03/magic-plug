@@ -45,35 +45,69 @@ export const SectionHeading: React.FC<{
   );
 };
 
-export const H1Heading: FC<{ children: React.ReactNode }> = ({ children }) => {
+export const H1Heading: FC<{
+  children: React.ReactNode;
+  className?: string;
+}> = ({ children, className = "" }) => {
   return (
-    <h1 className="text-2xl sm:text-3xl md:text-4xl xl:text-6xl !leading-tight font-semibold">
+    <h1
+      className={clsx(
+        "text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl !leading-tight font-semibold text-dark-primary",
+        className
+      )}
+    >
       {children}
     </h1>
   );
 };
 
-export const H2Heading: FC<{ children: React.ReactNode }> = ({ children }) => {
+export const H2Heading: FC<{
+  children: React.ReactNode;
+  className?: string;
+}> = ({ children, className = "" }) => {
   return (
-    <h2 className="text-xl sm:text-2xl md:text-3xl xl:text-5xl !leading-tight font-semibold">
+    <h2
+      className={clsx(
+        "text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl !leading-tight font-semibold  text-dark-primary",
+        className
+      )}
+    >
       {children}
     </h2>
   );
 };
 
-export const H3Heading: FC<{ children: React.ReactNode }> = ({ children }) => {
+export const H3Heading: FC<{
+  children: React.ReactNode;
+  className?: string;
+  arrow?: boolean;
+}> = ({ children, className = "", arrow = true }) => {
   return (
-    <h3 className="flex items-center justify-start">
-      <StarIcon className="mr-2" />
+    <h3
+      className={clsx(
+        "flex items-center justify-start text-dark-primary font-semibold text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl !leading-tight",
+        className
+      )}
+    >
+      {arrow ? <StarIcon className="mr-2" /> : null}
       {children}
     </h3>
   );
 };
 
-export const H4Heading: FC<{ children: React.ReactNode }> = ({ children }) => {
+export const H4Heading: FC<{
+  children: React.ReactNode;
+  className?: string;
+  arrow?: boolean;
+}> = ({ children, className = "", arrow = true }) => {
   return (
-    <h4 className="flex items-center justify-start">
-      <StarIcon className="mr-2" />
+    <h4
+      className={clsx(
+        "flex items-center justify-start text-dark-primary font-semibold text-base sm:text-lg md:text-xl lg:text2xl xl:text-3xl mt-2 lg:mt-4 !leading-tight",
+        className
+      )}
+    >
+      {arrow ? <StarIcon className="mr-2" /> : null}
       {children}
     </h4>
   );

@@ -8,6 +8,7 @@ import SlugPageLayout from "@/Components/SlugPageLayout";
 import { Metadata } from "next";
 import Loader from "@/Atoms/Loader";
 import { notFound } from "next/navigation";
+import { H3Heading } from "@/Atoms/Heading";
 
 const isDev = process.env.ENVIRONMENT === "development";
 export const revalidate = isDev ? 0 : 900;
@@ -42,13 +43,7 @@ export default async function ServicesPage() {
                     {getPrefixedNumber(i + 1)}
                   </div>
                   <div className="h-full flex flex-col items-stretch justify-center">
-                    <div className="flex items-center justify-start">
-                      <StarIcon className="mr-2 w-3 h-3 md:w-5 md:h-5" />
-                      <p className="text-dark-light text-left capitalize font-bold text-lg md:text-xl lg:text-2xl !leading-tight">
-                        {item.name}
-                      </p>
-                    </div>
-
+                    <H3Heading>{item.name}</H3Heading>
                     <p className="text-dark-secondary text-left font-normal text-sm md:text-base lg:text-lg mt-2 lg:mt-4">
                       {item.description}
                     </p>

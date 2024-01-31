@@ -2,11 +2,12 @@
 import React, { useRef, useState } from "react";
 import clsx from "clsx";
 
-import { SectionHeading } from "@/Atoms/Heading";
+import { H4Heading, SectionHeading } from "@/Atoms/Heading";
 import ArrowIcon from "@/Icons/Arrow";
 import CustomSvg from "@/Components/CustomSvg";
 import { ExpertiseCollection } from "@studio/types";
 import { getPrefixedNumber } from "@/utils";
+import Description from "@/Atoms/Description";
 
 interface Props {
   data: ExpertiseCollection;
@@ -83,12 +84,15 @@ const Expertise: React.FC<Props> = ({ data }) => {
                 className="w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 shrink-0"
                 src={item.image}
               />
-              <p className="text-light-primary text-left capitalize font-semibold text-xl md:text-2xl lg:text-3xl mt-4 lg:mt-8 leading-tight">
+              <H4Heading
+                className="text-light-primary capitalize"
+                arrow={false}
+              >
                 {item.name}
-              </p>
-              <p className="text-light-primary text-left font-normal text-base md:text-lg lg:text-xl mt-2 lg:mt-4">
+              </H4Heading>
+              <Description className="text-light-secondary">
                 {item.description}
-              </p>
+              </Description>
             </div>
           ))}
         </div>

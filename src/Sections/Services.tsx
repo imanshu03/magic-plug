@@ -5,6 +5,7 @@ import { ServiceCollection } from "@studio/types";
 import Link from "next/link";
 import { getImageData } from "@studio/image";
 import ImageContainer from "@/Atoms/ImageContainer";
+import Description from "@/Atoms/Description";
 
 interface Props {
   data: ServiceCollection;
@@ -28,27 +29,29 @@ const Services: React.FC<Props> = ({ data }) => {
               : null;
             return (
               <Link
-                className=" bg-theme rounded-xl shadow-md relative overflow-hidden min-h-[260px]"
+                className="bg-theme rounded-xl shadow-md relative overflow-hidden min-h-[260px] [&>.service-heading]:hover:-translate-y-full [&>.service-description]:hover:translate-y-0"
                 key={i}
                 href={item.slug}
               >
-                <div className="flex flex-col items-start justify-start p-4 md:p-6 lg:p-8 relative z-[1]">
-                  {imageData ? (
-                    <ImageContainer
-                      src={imageData.src}
-                      width={imageData.width}
-                      height={imageData.height}
-                      alt={item.name}
-                      className="aspect-square h-auto w-full mb-4 hidden md:block"
-                    />
-                  ) : null}
-                  <p className="text-light-primary text-left capitalize font-bold text-xl md:text-2xl lg:text-3xl leading-tight relative z-[1]">
+                <div className="w-full h-full flex items-center justify-center p-4 z-[2] absolute uppercase top-0 left-0 translate-x-0 translate-y-0 transition-transform duration-500 ease-in-out service-heading">
+                  <h3 className="text-[265%] text-center text-light-primary [word-spacing:9999px] font-extrabold !leading-tight">
                     {item.name}
-                  </p>
-                  <p className="text-light-primary text-left font-normal text-base md:text-lg lg:text-xl mt-2 lg:mt-4 relative z-[1]">
-                    {item.description}
-                  </p>
+                  </h3>
                 </div>
+                <div className="w-full h-full flex items-center justify-center p-4 z-[1] absolute top-0 left-0 translate-x-0 translate-y-full transition-transform duration-500 ease-in-out service-description">
+                  <Description className="text-light-primary ">
+                    {item.description}
+                  </Description>
+                </div>
+                {imageData ? (
+                  <ImageContainer
+                    src={imageData.src}
+                    width={imageData.width}
+                    height={imageData.height}
+                    alt={item.name}
+                    className="aspect-square w-full opacity-10"
+                  />
+                ) : null}
               </Link>
             );
           })}

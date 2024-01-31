@@ -14,7 +14,7 @@ const Footer: React.FC<LinkData> = ({ linkData }) => {
 
   return (
     <>
-      <Divider margin direction="down" />
+      <Divider margin />
       <footer className="w-screen h-auto bg-app-bg px-[5vw] lg:px-[10vw] pb-10 text-sm md:text-base flex flex-col items-center justify-start text-dark-primary">
         <div className="w-full flex flex-col md:flex-row items-center md:items-start justify-start">
           <div className="flex flex-col items-start justify-start grow mb-8 md:mb-0">
