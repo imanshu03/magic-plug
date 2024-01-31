@@ -44,7 +44,7 @@ export default async function ServicesPage() {
                   <div className="h-full flex flex-col items-stretch justify-center">
                     <div className="flex items-center justify-start">
                       <StarIcon className="mr-2 w-3 h-3 md:w-5 md:h-5" />
-                      <p className="text-dark-light text-left capitalize font-semibold text-lg md:text-xl lg:text-2xl leading-tight">
+                      <p className="text-dark-light text-left capitalize font-bold text-lg md:text-xl lg:text-2xl !leading-tight">
                         {item.name}
                       </p>
                     </div>
