@@ -232,7 +232,7 @@ const Contact: React.FC<Props> = ({ services, referrers, socialLinks }) => {
           <Button
             type="submit"
             className="order-1 md:order-2"
-            disabled={loading}
+            loading={loading}
           >
             Get in touch
           </Button>

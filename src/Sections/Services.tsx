@@ -42,7 +42,7 @@ const Services: React.FC<Props> = ({ data }) => {
                       className="aspect-square h-auto w-full mb-4 hidden md:block"
                     />
                   ) : null}
-                  <p className="text-light-primary text-left capitalize font-semibold text-xl md:text-2xl lg:text-3xl leading-tight relative z-[1]">
+                  <p className="text-light-primary text-left capitalize font-bold text-xl md:text-2xl lg:text-3xl leading-tight relative z-[1]">
                     {item.name}
                   </p>
                   <p className="text-light-primary text-left font-normal text-base md:text-lg lg:text-xl mt-2 lg:mt-4 relative z-[1]">
