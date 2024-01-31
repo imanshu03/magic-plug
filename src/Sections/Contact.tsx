@@ -1,5 +1,5 @@
 "use client";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import Checkbox from "@/Atoms/Checkbox";
 import Input from "@/Atoms/Input";
@@ -14,6 +14,8 @@ import {
 import { Button } from "@/Atoms/Button";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { H1Heading } from "@/Atoms/Heading";
+import lottie from "lottie-web";
 
 interface FormInputs {
   name: string;
@@ -31,7 +33,9 @@ interface Props {
 }
 
 const Contact: React.FC<Props> = ({ services, referrers, socialLinks }) => {
+  const lottieRef = useRef<HTMLDivElement>(null);
   const [loading, setLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -85,17 +89,37 @@ const Contact: React.FC<Props> = ({ services, referrers, socialLinks }) => {
     }
   };
 
+  useEffect(() => {
+    const animation = lottie.loadAnimation({
+      container: lottieRef.current!,
+      renderer: "svg",
+      loop: true,
+      autoplay: true,
+      path: "/assets/lottie/Contact.json",
+      rendererSettings: {
+        viewBoxSize: "450 450 1020 1020",
+      },
+    });
+    return () => {
+      animation?.destroy();
+    };
+  }, []);
+
   return (
     <section className="w-screen min-h-screen bg-app-bg pt-[68px] sm:pt-[76px] md:pt-[84px] lg:pt-[92px] xl:pt-[100px] px-[5vw] lg:px-[10vw]">
-      <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-7xl leading-tight font-semibold">
-        Let&apos;s team up and
-        <br />
-        make&nbsp;
-        <span className="text-theme">
-          M<span className="font-hurricane text-[1.5em]">agic</span>
-        </span>
-        &nbsp;&nbsp;happen!
-      </h1>
+      <div className="flex items-center justify-between overflow-visible">
+        <H1Heading>
+          Let&apos;s team up and
+          <br />
+          make&nbsp;
+          <span className="text-theme">magic</span>
+          &nbsp;happen!
+        </H1Heading>
+        <div
+          className="aspect-square max-h-[160px] -rotate-45"
+          ref={lottieRef}
+        />
+      </div>
       <form
         className="flex flex-col items-stretch justify-start text-base md:text-[2vw] font-medium mt-6 md:mt-10 lg:mt-16 tracking-wide gap-7"
         autoComplete="off"

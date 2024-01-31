@@ -2,6 +2,7 @@
 import clsx from "clsx";
 import Image from "next/image";
 import React, { FC, useState } from "react";
+import ShimmerBlock from "./ShimmerBlock";
 
 interface Props {
   src: string;
@@ -22,15 +23,7 @@ const ImageContainer: FC<Props> = ({
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   return (
-    <div
-      className={clsx(
-        className,
-        "relative",
-        !isLoaded
-          ? "after:h-full after:w-full after:absolute after:content-[''] after:left-0 after:top-0 after:bg-dark-primary/10 after:animate-pulse"
-          : ""
-      )}
-    >
+    <ShimmerBlock className={className} loading={!isLoaded}>
       <Image
         src={src}
         width={width}
@@ -44,7 +37,7 @@ const ImageContainer: FC<Props> = ({
         priority
         onLoad={() => setIsLoaded(true)}
       />
-    </div>
+    </ShimmerBlock>
   );
 };
 

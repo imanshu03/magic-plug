@@ -35,7 +35,8 @@ export const getServices = async () => {
               name,
               description,
               priority,
-              slug
+              slug,
+              image
             } | order(priority desc)`);
     result = data;
   } finally {

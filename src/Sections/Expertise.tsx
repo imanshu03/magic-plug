@@ -52,7 +52,7 @@ const Expertise: React.FC<Props> = ({ data }) => {
 
   return (
     <section
-      className="w-screen py-16 md:py-0 h-auto md:h-screen md:min-h-screen flex flex-col md:flex-row items-center justify-center md:justify-start overflow-hidden px-[5vw] lg:px-[10vw]"
+      className="w-screen py-16 md:py-0 h-auto flex flex-col md:flex-row items-center justify-center md:justify-start overflow-hidden px-[5vw] lg:px-[10vw]"
       ref={parentRef}
     >
       <SectionHeading
@@ -63,7 +63,7 @@ const Expertise: React.FC<Props> = ({ data }) => {
         Transforming ideas into exceptional digital products
       </SectionHeading>
       <div className="mt-6 md:mt-0 w-full max-w-[320px] md:max-w-none md:w-[400px] lg:w-[450px] xl:w-[500px] h-auto flex flex-col items-center justify-start shrink-0 [perspective:300px]">
-        <div className="w-full h-[320px] md:max-h-none md:h-[400px] lg:h-[450px] xl:h-[500px] relative [transform-style:preserve-3d]">
+        <div className="w-full h-[360px] md:max-h-none md:h-[400px] lg:h-[450px] xl:h-[500px] relative [transform-style:preserve-3d]">
           {data.map((item, i) => (
             <div
               className={clsx(
@@ -86,7 +86,7 @@ const Expertise: React.FC<Props> = ({ data }) => {
               <p className="text-light-primary text-left capitalize font-semibold text-xl md:text-2xl lg:text-3xl mt-4 lg:mt-8 leading-tight">
                 {item.name}
               </p>
-              <p className="text-light-primary text-left font-extralight text-base md:text-lg lg:text-xl mt-2 lg:mt-4">
+              <p className="text-light-primary text-left font-normal text-base md:text-lg lg:text-xl mt-2 lg:mt-4">
                 {item.description}
               </p>
             </div>

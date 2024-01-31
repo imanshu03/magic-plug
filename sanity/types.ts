@@ -3,6 +3,7 @@ export type Services = {
   description: string;
   priority: number;
   slug: string;
+  image?: any;
 };
 
 type Referrer = {
@@ -10,12 +11,9 @@ type Referrer = {
   priority: number;
 };
 
-type Expertise = Omit<
-  Services & {
-    image: string;
-  },
-  "slug"
->;
+type Expertise = Omit<Services, "slug" | "image"> & {
+  image: string;
+};
 
 type Contact = {
   name: string;

@@ -1,4 +1,3 @@
-import About from "@/Sections/About";
 import Intro from "@/Sections/Intro";
 import Expertise from "@/Sections/Expertise";
 import Divider from "@/Atoms/Divider";
@@ -15,6 +14,7 @@ import {
 import Clients from "@/Sections/Clients";
 import { Suspense } from "react";
 import Loader from "@/Atoms/Loader";
+import About from "@/Sections/About";
 
 const isDev = process.env.ENVIRONMENT === "development";
 export const revalidate = isDev ? 0 : 900;
@@ -47,19 +47,23 @@ export default async function Home() {
       <main className="w-screen h-auto">
         <Intro />
         <About />
-        {expertiseData.length ? (
+        {servicesData.length ? (
           <>
             <Divider margin />
+            <Services data={servicesData} />
+          </>
+        ) : null}
+        <Divider margin direction="up" />
+        <Carousel />
+        <Divider margin direction="down" />
+        {expertiseData.length ? (
+          <>
             <Expertise data={expertiseData} />
           </>
         ) : null}
-        <Divider />
-        <Carousel />
-        <Divider />
-        {servicesData.length ? <Services data={servicesData} /> : null}
         {clientsData.length ? (
           <>
-            <Divider margin direction="down" />
+            <Divider margin />
             <Clients data={clientsData} />
             <Divider margin direction="up" />
           </>

@@ -48,7 +48,6 @@ const config: Config = {
       },
       fontFamily: {
         manrope: "var(--font-manrope)",
-        hurricane: "var(--font-hurricane)",
       },
       colors: {
         ...defaultTheme.colors,

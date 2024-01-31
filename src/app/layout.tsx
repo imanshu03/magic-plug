@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-sync-scripts */
 import type { Metadata } from "next";
-import { Hurricane, Manrope } from "next/font/google";
+import { Manrope, Hurricane } from "next/font/google";
 import clsx from "clsx";
 import Script from "next/script";
 import SmoothScrollWrapper from "../Components/SmoothScrollWrapper";
@@ -9,20 +9,12 @@ import { LinkData } from "@/types";
 import { ToastContainer } from "react-toastify";
 
 import "./globals.css";
-import bundleCss from "!raw-loader!./output.css";
 import "react-toastify/dist/ReactToastify.css";
 
 const manrope = Manrope({
   subsets: ["latin"],
   weight: ["200", "300", "400", "500", "600", "700", "800"],
   variable: "--font-manrope",
-  display: "swap",
-});
-
-const hurricane = Hurricane({
-  subsets: ["latin"],
-  weight: ["400"],
-  variable: "--font-hurricane",
   display: "swap",
 });
 
@@ -172,22 +164,19 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
-      className={clsx(
-        "bg-app-bg w-screen h-auto",
-        manrope.variable,
-        hurricane.variable
-      )}
+      className={clsx("bg-app-bg w-screen h-auto", manrope.variable)}
     >
-      <head>
-        {process.env.ENVIRONMENT !== "development" ? (
-          <>
-            <style
-              id="tailwind-ssr"
-              dangerouslySetInnerHTML={{ __html: bundleCss }}
-            ></style>
-            <Script src="https://www.googletagmanager.com/gtag/js?id=G-X2L15MZPF3"></Script>
-            <Script id="google-analytics">
-              {`
+      {process.env.ENVIRONMENT !== "development" ? (
+        <head>
+          {/* <style
+            id="tailwind-ssr"
+            dangerouslySetInnerHTML={{
+              __html: require("!raw-loader!./output.css"),
+            }}
+          ></style> */}
+          <Script src="https://www.googletagmanager.com/gtag/js?id=G-X2L15MZPF3"></Script>
+          <Script id="google-analytics">
+            {`
                 window.dataLayer = window.dataLayer || [];
                 function gtag() {
                   dataLayer.push(arguments);
@@ -197,10 +186,9 @@ export default async function RootLayout({
     
                 gtag("config", "G-X2L15MZPF3");
               `}
-            </Script>
-          </>
-        ) : null}
-      </head>
+          </Script>
+        </head>
+      ) : null}
       <body className="bg-app-bg w-screen h-auto font-manrope">
         <ToastContainer className="text-dark-primary font-manrope" />
         <SmoothScrollWrapper linkData={linkData}>
