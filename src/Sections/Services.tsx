@@ -6,6 +6,7 @@ import Link from "next/link";
 import { getImageData } from "@studio/image";
 import ImageContainer from "@/Atoms/ImageContainer";
 import Description from "@/Atoms/Description";
+import clsx from "clsx";
 
 interface Props {
   data: ServiceCollection;
@@ -29,16 +30,21 @@ const Services: React.FC<Props> = ({ data }) => {
               : null;
             return (
               <Link
-                className="bg-theme rounded-xl shadow-md relative overflow-hidden min-h-[260px] [&>.service-heading]:hover:-translate-y-full [&>.service-description]:hover:translate-y-0"
+                className="bg-theme rounded-xl shadow-md relative overflow-hidden md:min-h-[260px] [&>.service-heading]:hover:-translate-y-full [&>.service-description]:hover:translate-y-0"
                 key={i}
                 href={item.slug}
               >
-                <div className="w-full h-full flex items-center justify-center p-4 z-[2] absolute uppercase top-0 left-0 translate-x-0 translate-y-0 transition-transform duration-500 ease-in-out service-heading">
+                <div
+                  className={clsx(
+                    "w-full h-auto md:h-full flex flex-col items-center justify-center p-4 uppercase service-heading",
+                    "md:absolute md:z-[2] md:top-0 nmd:left-0 md:translate-x-0 md:translate-y-0 md:transition-transform md:duration-500 md:ease-in-out"
+                  )}
+                >
                   <h3 className="text-[265%] text-center text-light-primary [word-spacing:9999px] font-extrabold !leading-tight">
                     {item.name}
                   </h3>
                 </div>
-                <div className="w-full h-full flex items-center justify-center p-4 z-[1] absolute top-0 left-0 translate-x-0 translate-y-full transition-transform duration-500 ease-in-out service-description">
+                <div className="hidden md:flex w-full h-full items-center justify-center p-4 z-[1] absolute top-0 left-0 translate-x-0 translate-y-full transition-transform duration-500 ease-in-out service-description">
                   <Description className="text-light-primary ">
                     {item.description}
                   </Description>
@@ -49,7 +55,7 @@ const Services: React.FC<Props> = ({ data }) => {
                     width={imageData.width}
                     height={imageData.height}
                     alt={item.name}
-                    className="aspect-square w-full opacity-10"
+                    className="aspect-square w-full opacity-10 !absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 md:!relative md:top-0 md:left-0 md:-translate-x-0 md:-translate-y-0"
                   />
                 ) : null}
               </Link>
