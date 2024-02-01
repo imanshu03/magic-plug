@@ -171,7 +171,7 @@ export default async function RootLayout({
           <style
             id="tailwind-ssr"
             dangerouslySetInnerHTML={{
-              __html: require("!raw-loader!./output.css"),
+              __html: require("!raw-loader!./output.css").default,
             }}
           ></style>
           <Script src="https://www.googletagmanager.com/gtag/js?id=G-X2L15MZPF3"></Script>
