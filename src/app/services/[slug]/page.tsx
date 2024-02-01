@@ -79,7 +79,9 @@ export default async function ServicesSlugPage({
           ) : null}
           <Divider margin fullWidth />
           <article className="flex flex-col items-start justify-start prose max-w-none prose-sm md:prose-md lg:prose-lg text-dark-primary">
-            <H3Heading>Explore our other offered services:</H3Heading>
+            <H3Heading arrow={false}>
+              Explore our other offered services:
+            </H3Heading>
             <ul>
               {otherServices.map(({ name, slug }) => (
                 <li key={slug}>

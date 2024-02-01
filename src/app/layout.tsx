@@ -168,12 +168,12 @@ export default async function RootLayout({
     >
       {process.env.ENVIRONMENT !== "development" ? (
         <head>
-          {/* <style
+          <style
             id="tailwind-ssr"
             dangerouslySetInnerHTML={{
               __html: require("!raw-loader!./output.css"),
             }}
-          ></style> */}
+          ></style>
           <Script src="https://www.googletagmanager.com/gtag/js?id=G-X2L15MZPF3"></Script>
           <Script id="google-analytics">
             {`

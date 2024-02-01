@@ -8,9 +8,9 @@ export const ColoredHeading: React.FC<{
   return (
     <div className="flex justify-center items-center">
       <StarIcon className="w-3 h-3 md:w-5 md:h-5 mr-2 [&>*]:fill-light-primary" />
-      <h2 className="text-light-primary uppercase tracking-wider text-xs md:text-sm lg:text-base">
+      <h1 className="text-light-primary uppercase tracking-wider text-xs md:text-sm lg:text-base">
         {children}
-      </h2>
+      </h1>
     </div>
   );
 };
