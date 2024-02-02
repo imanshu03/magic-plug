@@ -29,36 +29,61 @@ const Services: React.FC<Props> = ({ data }) => {
               ? getImageData(item.image.asset)
               : null;
             return (
-              <Link
-                className="bg-theme rounded-xl shadow-md relative overflow-hidden md:min-h-[260px] [&>.service-heading]:hover:-translate-y-full [&>.service-description]:hover:translate-y-0"
-                key={i}
-                href={item.slug}
+              <div
+                key={item.slug}
+                className="w-full h-full md:min-h-[260px] [&>a]:hover:[transform:rotateX(-180deg)] [perspective:1400px]"
               >
-                <div
-                  className={clsx(
-                    "w-full h-auto md:h-full flex flex-col items-center justify-center p-4 uppercase service-heading",
-                    "md:absolute md:z-[2] md:top-0 nmd:left-0 md:translate-x-0 md:translate-y-0 md:transition-transform md:duration-500 md:ease-in-out"
-                  )}
+                <Link
+                  className="block rounded-xl shadow-md relative [transform-style:preserve-3d] transition-transform duration-500 ease-in-out"
+                  href={item.slug}
                 >
-                  <h3 className="text-[265%] text-center text-light-primary [word-spacing:9999px] font-extrabold !leading-tight">
-                    {item.name}
-                  </h3>
-                </div>
-                <div className="hidden md:flex w-full h-full items-center justify-center p-4 z-[1] absolute top-0 left-0 translate-x-0 translate-y-full transition-transform duration-500 ease-in-out service-description">
-                  <Description className="text-light-primary ">
-                    {item.description}
-                  </Description>
-                </div>
-                {imageData ? (
-                  <ImageContainer
-                    src={imageData.src}
-                    width={imageData.width}
-                    height={imageData.height}
-                    alt={item.name}
-                    className="aspect-square w-full opacity-10 !absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 md:!relative md:top-0 md:left-0 md:-translate-x-0 md:-translate-y-0"
-                  />
-                ) : null}
-              </Link>
+                  <div
+                    className={clsx(
+                      "hidden md:block w-full h-full absolute z-[1] top-0 left-0 hide-backface bg-theme [transform:rotateX(-180deg)] rounded-xl overflow-hidden"
+                    )}
+                  >
+                    <Description className="text-light-primary absolute z-[1] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full px-4">
+                      {item.description}
+                    </Description>
+                    {imageData ? (
+                      <ImageContainer
+                        src={imageData.src}
+                        width={imageData.width}
+                        height={imageData.height}
+                        alt={item.name}
+                        className="aspect-square w-full opacity-10"
+                      />
+                    ) : null}
+                  </div>
+                  <div
+                    className={clsx(
+                      "w-full h-full relative z-[1] hide-backface bg-theme [transform:rotateX(0deg)] rounded-xl overflow-hidden"
+                    )}
+                  >
+                    <h3
+                      className={clsx(
+                        "text-[265%] uppercase text-center z-[1] text-light-primary [word-spacing:9999px] font-extrabold !leading-tight",
+                        "relative py-3 md:py-0 md:absolute md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2"
+                      )}
+                    >
+                      {item.name}
+                    </h3>
+                    {imageData ? (
+                      <ImageContainer
+                        src={imageData.src}
+                        width={imageData.width}
+                        height={imageData.height}
+                        alt={item.name}
+                        className={clsx(
+                          "aspect-square w-full opacity-10",
+                          "!absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
+                          "md:!relative md:top-0 md:left-0 md:translate-x-0 md:translate-y-0"
+                        )}
+                      />
+                    ) : null}
+                  </div>
+                </Link>
+              </div>
             );
           })}
         </div>

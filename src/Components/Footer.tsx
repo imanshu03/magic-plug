@@ -39,7 +39,7 @@ const Footer: React.FC<LinkData> = ({ linkData }) => {
           </div>
           <div className="flex items-start justify-start">
             <div className="flex flex-col items-start justify-start font-medium">
-              <p>follow us:</p>
+              <p>Follow us:</p>
               {linkData.social.map(({ name, link }, i) => (
                 <CustomLink className="mt-4 md:mt-2" href={link} key={i}>
                   {name}

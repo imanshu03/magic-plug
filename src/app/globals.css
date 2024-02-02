@@ -43,3 +43,9 @@ input[type="radio"] {
   appearance: none;
   -webkit-appearance: none;
 }
+
+.hide-backface {
+  backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
