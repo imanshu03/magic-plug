@@ -53,7 +53,7 @@ const Expertise: React.FC<Props> = ({ data }) => {
 
   return (
     <section
-      className="w-screen py-16 md:py-0 h-auto flex flex-col md:flex-row items-center justify-center md:justify-start overflow-hidden px-[5vw] lg:px-[10vw]"
+      className="w-screen h-auto flex flex-col md:flex-row items-center justify-center md:justify-start overflow-hidden px-[5vw] lg:px-[10vw] gap-0 md:gap-4 xl:gap-6"
       ref={parentRef}
     >
       <SectionHeading

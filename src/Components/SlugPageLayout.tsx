@@ -110,7 +110,7 @@ const SlugPageLayout: React.FC<Props> = ({ data, slug, children = null }) => {
           className={clsx(
             "w-full flex flex-col md:flex-row items-center justify-between",
             "h-auto md:min-h-[calc(100vh_-_84px)] lg:min-h-[calc(100vh_-_92px)] xl:min-h-[calc(100vh_-_100px)]",
-            "mb-6 md:mb-0 gap-6 lg:gap-12"
+            "gap-6 lg:gap-12"
           )}
         >
           <div
