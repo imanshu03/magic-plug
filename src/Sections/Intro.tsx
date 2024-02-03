@@ -22,7 +22,7 @@ const Intro = () => {
 
   return (
     <section
-      className="w-screen h-auto min-h-screen bg-app-bg overflow-hidden relative px-[5vw] lg:px-[10vw] pt-[68px] sm:pt-[76px] md:pt-[84px] lg:pt-[92px] xl:pt-[100px] pb-8 flex flex-col items-center justify-center"
+      className="w-screen h-auto min-h-screen bg-app-bg overflow-hidden relative px-[5vw] lg:px-[10vw] flex flex-col items-center justify-center"
       ref={scrollerRef}
     >
       <div className="flex flex-col items-stretch justify-start shrink-0 w-full relative z-[1]">
