@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-sync-scripts */
 import type { Metadata } from "next";
-import { Manrope, Hurricane } from "next/font/google";
+import { Manrope } from "next/font/google";
 import clsx from "clsx";
 import Script from "next/script";
 import SmoothScrollWrapper from "../Components/SmoothScrollWrapper";

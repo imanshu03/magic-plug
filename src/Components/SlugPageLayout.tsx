@@ -48,6 +48,12 @@ export const portableTextComponents: Partial<PortableTextReactComponents> = {
     h4: ({ children }) => {
       return <H4Heading>{children}</H4Heading>;
     },
+    h3NoArrow: ({ children }) => {
+      return <H3Heading arrow={false}>{children}</H3Heading>;
+    },
+    h4NoArrow: ({ children }) => {
+      return <H4Heading arrow={false}>{children}</H4Heading>;
+    },
   },
   types: {
     image: ({ value, isInline }) => {
