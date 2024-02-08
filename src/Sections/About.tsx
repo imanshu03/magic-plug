@@ -7,7 +7,7 @@ import Description from "@/Atoms/Description";
 const About = () => {
   return (
     <section className="bg-app-bg w-screen px-[5vw] lg:px-[10vw]">
-      <div className="w-full h-auto flex flex-col md:flex-row items-center justify-between flex-nowrap bg-theme rounded-xl box-border overflow-hidden shadow-md">
+      <div className="w-full h-auto flex flex-col md:flex-row items-center justify-between flex-nowrap bg-theme box-border overflow-hidden shadow-md">
         <div className="flex flex-col items-start justify-center p-4 md:p-6 lg:p-8 order-2 md:order-1 w-full md:w-1/2 grow shrink-0">
           <ColoredHeading>How we help you ?</ColoredHeading>
           <H2Heading className="text-light-primary mt-4">

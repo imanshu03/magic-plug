@@ -110,7 +110,7 @@ const Menu: React.FC<Props & LinkData> = ({ className = "", linkData }) => {
             >
               <div
                 className={clsx(
-                  "flex flex-col items-start justify-start w-screen h-screen md:w-[40vw] xl:w-[30vw] md:h-auto pt-6 pb-14 px-10 text-4xl font-semibold tracking-wide bg-app-bg md:rounded-xl",
+                  "flex flex-col items-start justify-start w-screen h-screen md:w-[40vw] xl:w-[30vw] md:h-auto pt-6 pb-14 px-10 text-4xl font-semibold tracking-wide bg-app-bg",
                   animState === ANIMATION.HIDE
                     ? "[clip-path:polygon(0%_0%,100%_0%,100%_0%,0%_0%)]"
                     : "",

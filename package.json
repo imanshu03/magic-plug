@@ -16,6 +16,8 @@
     "axios": "^1.6.5",
     "clsx": "^2.1.0",
     "dayjs": "^1.11.10",
+    "embla-carousel-autoplay": "^8.0.0-rc22",
+    "embla-carousel-react": "^8.0.0-rc22",
     "googleapis": "^131.0.0",
     "lottie-web": "^5.12.2",
     "next": "~13.5.6",
