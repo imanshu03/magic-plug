@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "build:local": "next build",
     "build": "npx tailwindcss -i ./src/app/globals.css -o ./src/app/output.css && next build",
     "start": "next start",
     "lint": "next lint"

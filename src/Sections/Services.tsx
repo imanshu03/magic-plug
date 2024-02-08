@@ -1,12 +1,12 @@
-"use client";
 import React from "react";
-import { SectionHeading } from "@/Atoms/Heading";
+import { H3Heading, SectionHeading } from "@/Atoms/Heading";
 import { ServiceCollection } from "@studio/types";
 import Link from "next/link";
 import { getImageData } from "@studio/image";
 import ImageContainer from "@/Atoms/ImageContainer";
 import Description from "@/Atoms/Description";
-import clsx from "clsx";
+import { getPrefixedNumber } from "@/utils";
+import SideArrowIcon from "@/Icons/SideArrow";
 
 interface Props {
   data: ServiceCollection;
@@ -14,35 +14,39 @@ interface Props {
 
 const Services: React.FC<Props> = ({ data }) => {
   return (
-    <section className="w-screen h-auto min-h-screen px-[5vw] lg:px-[10vw]">
-      <div className="w-full h-auto flex flex-col items-center justify-center">
-        <SectionHeading
-          heading="Our services"
-          className="w-full items-center px-[5vw] md:px-0"
-        >
-          From inception to implementation, in the realm of software solutions,
-          consider it done - we&apos;ve got you covered.
-        </SectionHeading>
-        <div className="mt-6 md:mt-10 lg:mt-16 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+    <section className="w-screen h-auto flex flex-col items-center justify-center px-[5vw] lg:px-[10vw]">
+      <SectionHeading heading="Our services" className="w-full items-center">
+        From inception to implementation, in the realm of software solutions,
+        consider it done - we&apos;ve got you covered.
+      </SectionHeading>
+      <div className="mt-6 md:mt-10 lg:mt-16 w-full">
+        <div className="grid grid-flow-row auto-cols-fr">
           {data.map((item, i) => {
             const imageData = item.image?.asset
               ? getImageData(item.image.asset)
               : null;
             return (
-              <div
+              <Link
+                className="box-border p-4 flex items-start justify-start border-b border-solid border-dark-primary/10 last:border-b-[0px] group transition-all duration-300 ease-in-out hover:bg-theme hover:border-theme"
+                href={item.slug}
                 key={item.slug}
-                className="w-full h-full md:min-h-[260px] [&>a]:hover:[transform:rotateX(-180deg)] [perspective:1400px]"
               >
-                <Link
-                  className="block rounded-xl shadow-md relative [transform-style:preserve-3d] transition-transform duration-500 ease-in-out"
-                  href={item.slug}
-                >
-                  <div
-                    className={clsx(
-                      "hidden md:block w-full h-full absolute z-[1] top-0 left-0 hide-backface bg-theme [transform:rotateX(-180deg)] rounded-xl overflow-hidden"
-                    )}
-                  >
-                    <Description className="text-light-primary absolute z-[1] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full px-4">
+                <div className="w-full flex flex-col items-stretch justify-start">
+                  <div className="w-full flex items-center justify-start">
+                    <p className="text-theme/20 group-hover:text-light-primary/20 text-4xl md:text-6xl lg:text-8xl font-semibold min-w-[64px] md:min-w-[96px] lg:min-w-[160px] transition-colors duration-300 ease-in-out">
+                      {getPrefixedNumber(i + 1)}
+                    </p>
+                    <H3Heading
+                      arrow={false}
+                      className="text-dark-primary transition-colors duration-300 ease-in-out group-hover:text-light-primary"
+                    >
+                      {item.name}
+                    </H3Heading>
+                    <div className="grow" />
+                    <SideArrowIcon className="w-6 h-6 md:w-8 md:h-8 lg:w-12 lg:h-12 shrink-0transition-colors duration-300 ease-in-out group-hover:[&>path]:stroke-light-primary" />
+                  </div>
+                  <div className="w-full flex items-center justify-start pl-16 md:pl-24 lg:pl-40 gap-6 max-h-0 overflow-hidden group-hover:lg:max-h-80 transition-all duration-300 ease-in-out">
+                    <Description className="text-light-primary grow">
                       {item.description}
                     </Description>
                     {imageData ? (
@@ -51,39 +55,12 @@ const Services: React.FC<Props> = ({ data }) => {
                         width={imageData.width}
                         height={imageData.height}
                         alt={item.name}
-                        className="aspect-square w-full opacity-10"
+                        className="aspect-square w-full grow-0"
                       />
                     ) : null}
                   </div>
-                  <div
-                    className={clsx(
-                      "w-full h-full relative z-[1] hide-backface bg-theme [transform:rotateX(0deg)] rounded-xl overflow-hidden"
-                    )}
-                  >
-                    <h3
-                      className={clsx(
-                        "text-[265%] uppercase text-center z-[1] text-light-primary [word-spacing:9999px] font-extrabold !leading-tight",
-                        "relative py-3 md:py-0 md:absolute md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2"
-                      )}
-                    >
-                      {item.name}
-                    </h3>
-                    {imageData ? (
-                      <ImageContainer
-                        src={imageData.src}
-                        width={imageData.width}
-                        height={imageData.height}
-                        alt={item.name}
-                        className={clsx(
-                          "aspect-square w-full opacity-10",
-                          "!absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
-                          "md:!relative md:top-0 md:left-0 md:translate-x-0 md:translate-y-0"
-                        )}
-                      />
-                    ) : null}
-                  </div>
-                </Link>
-              </div>
+                </div>
+              </Link>
             );
           })}
         </div>

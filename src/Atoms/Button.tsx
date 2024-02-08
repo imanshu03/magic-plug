@@ -29,7 +29,7 @@ export const Button: React.FC<
           loading ? "block" : "hidden"
         )}
       >
-        <div className="w-10 h-10 border-t-4 border-t-light-primary border-l-4 border-l-light-primary border-r-4 border-r-light-primary border-b-4 border-b-transparent rounded-[50%] animate-spin" />
+        <div className="w-6 h-6 lg:w-10 lg:h-10 border-t-4 border-t-light-primary border-l-4 border-l-light-primary border-r-4 border-r-light-primary border-b-4 border-b-transparent rounded-[50%] animate-spin" />
       </div>
     </button>
   );
