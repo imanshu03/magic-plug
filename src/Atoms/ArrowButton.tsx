@@ -35,7 +35,7 @@ const ArrowButton: FC<Props> = ({
 
       <ArrowIcon
         className={clsx(
-          "rounded-full absolute z-[2] w-full h-full top-0 left-0 p-1 [&>*]:stroke-light-primary bg-theme clip-path-full",
+          "hidden md:block rounded-full absolute z-[2] w-full h-full top-0 left-0 p-1 [&>*]:stroke-light-primary bg-theme clip-path-full",
           "transition-all duration-500 ease-in-out",
           direction !== "left" ? "rotate-180" : "",
           !disabled ? "group-hover:clip-path-0" : ""

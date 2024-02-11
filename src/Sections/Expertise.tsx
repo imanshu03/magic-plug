@@ -72,17 +72,17 @@ const Expertise: React.FC<Props> = ({ data }) => {
 
   return (
     <section
-      className="w-screen h-auto flex flex-col md:flex-row items-center justify-center md:justify-start overflow-hidden gap-0 md:gap-4 xl:gap-6"
+      className="w-screen h-auto flex flex-col md:flex-row items-center justify-center md:justify-start overflow-hidden gap-0 md:gap-4 xl:gap-6 px-[5vw] lg:px-[10vw]"
       ref={parentRef}
     >
       <SectionHeading
-        className="md:items-start md:grow relative z-[10] px-[5vw] md:px-0 md:pl-[5vw] lg:pl-[10vw]"
+        className="md:items-start md:grow relative z-[10]"
         textClassName="md:text-left"
         heading="Our expertise"
       >
         Transforming ideas into exceptional digital products
       </SectionHeading>
-      <div className="mt-6 md:mt-0 w-full md:w-[400px] lg:w-[450px] xl:w-[500px] shrink-0 mx-0 md:mr-[5vw] lg:mr-[10vw]">
+      <div className="mt-6 md:mt-0 w-full md:w-[400px] lg:w-[450px] xl:w-[500px] shrink-0">
         <div className="w-full overflow-hidden" ref={emblaRef}>
           <div className="flex -ml-4 md:-ml-6 lg:-ml-8 touch-pan-y">
             {data.map((item, i) => (
@@ -91,7 +91,7 @@ const Expertise: React.FC<Props> = ({ data }) => {
                 key={i}
               >
                 <div
-                  className="w-full h-full flex flex-col items-start justify-end px-[5vw] py-4 md:p-6 lg:p-8 bg-theme"
+                  className="w-full h-full flex flex-col items-start justify-end p-4 md:p-6 lg:p-8 bg-theme"
                   style={{
                     ...(tweenValues.length && {
                       transform: `scale(${tweenValues[i]})`,

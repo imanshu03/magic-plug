@@ -65,15 +65,18 @@ const Clients: React.FC<Props> = ({ clients, testimonials }) => {
         })}
       </div>
       <div className="w-full">
-        <div className="overflow-hidden scrollbar-hide" ref={emblaRef}>
-          <div className="flex -ml-10 touch-pan-y md:first:ml-[5vw] lg:first:ml-[10vw] md:last:mr-[5vw] lg:last:mr-[10vw]">
+        <div
+          className="overflow-hidden scrollbar-hide px-[5vw] lg:px-[10vw]"
+          ref={emblaRef}
+        >
+          <div className="flex -ml-10 touch-pan-y">
             {testimonials.map(({ name, company, review, rating }, i) => (
               <div
                 className="basis-full md:basis-1/2 shrink-0 grow-0 h-full pl-10"
                 key={i}
               >
                 <div className="w-full h-full">
-                  <div className="flex flex-col items-start justify-between w-full h-auto min-h-[400px] bg-theme relative px-[5vw] py-4 md:p-6 lg:p-8">
+                  <div className="flex flex-col items-start justify-between w-full h-auto min-h-[400px] bg-theme relative p-4 md:p-6 lg:p-8">
                     <QuoteIcon className="w-24 h-24 [&>*]:fill-light-primary/20" />
                     <Description className="text-light-primary">
                       {review}
@@ -81,7 +84,7 @@ const Clients: React.FC<Props> = ({ clients, testimonials }) => {
                     <RatingStars rating={rating} className="self-end" />
                     <div className="absolute bottom-1 left-5 border-[24px] border-solid border-transparent border-t-theme translate-y-full" />
                   </div>
-                  <Description className="text-dark-primary font-semibold !mt-8 flex items-center justify-start gap-2 pl-[5vw] md:pl-0">
+                  <Description className="text-dark-primary font-semibold !mt-8 flex items-center justify-start gap-2 pl-4 md:pl-0">
                     <StarIcon />
                     <span>
                       {name}
