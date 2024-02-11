@@ -36,6 +36,13 @@ type Clients = {
   image: any;
 };
 
+type Testimonials = {
+  name: string;
+  company: string;
+  review: string;
+  rating: number;
+};
+
 export type DynamicPageData = {
   pageTitle: string;
   description: any;
@@ -83,3 +90,4 @@ export type ReferrerCollection = Array<Referrer>;
 export type ContactCollection = Array<Contact>;
 export type DynamicPageCollection = Array<DynamicPageSlugs>;
 export type ClientsCollection = Array<Clients>;
+export type TestimonialsCollection = Array<Testimonials>;

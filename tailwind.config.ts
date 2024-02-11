@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import plugin from "tailwindcss/plugin";
 import defaultTheme from "tailwindcss/defaultTheme";
 
 const config: Config = {
@@ -72,6 +73,16 @@ const config: Config = {
   plugins: [
     require("tailwind-scrollbar-hide"),
     require("@tailwindcss/typography"),
+    plugin(function ({ addComponents }) {
+      addComponents({
+        ".clip-path-0": {
+          clipPath: "circle(100%)",
+        },
+        ".clip-path-full": {
+          clipPath: "circle(0%)",
+        },
+      });
+    }),
   ],
   future: {
     hoverOnlyWhenSupported: true,

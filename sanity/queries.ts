@@ -9,6 +9,7 @@ import type {
   ExpertiseCollection,
   ReferrerCollection,
   ServiceCollection,
+  TestimonialsCollection,
 } from "./types";
 
 export const getExpertise = cache(async () => {
@@ -159,6 +160,24 @@ export const getServicesPage = async (slug: string) => {
     if (data.length) {
       result = data[0];
     }
+  } finally {
+    return result;
+  }
+};
+
+export const getTestimonials = async () => {
+  let result: TestimonialsCollection = [];
+  try {
+    const data = await sanityClient.fetch(`
+      *[_type == "testimonials"]{
+        name,
+        company,
+        review,
+        rating,
+        _createdAt
+      } | order(_createdAt asc)
+    `);
+    result = data;
   } finally {
     return result;
   }

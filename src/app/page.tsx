@@ -10,6 +10,7 @@ import {
   getReferrers,
   getServices,
   getSocialLinks,
+  getTestimonials,
 } from "@studio/queries";
 import Clients from "@/Sections/Clients";
 import { Suspense } from "react";
@@ -20,13 +21,14 @@ const isDev = process.env.ENVIRONMENT === "development";
 export const revalidate = isDev ? 0 : 900;
 
 export default async function Home() {
-  const [expertise, services, referrers, clients, socials] =
+  const [expertise, services, referrers, clients, socials, testimonials] =
     await Promise.allSettled([
       getExpertise(),
       getServices(),
       getReferrers(),
       getClients(),
       getSocialLinks(),
+      getTestimonials(),
     ]);
 
   const contactPageProps = {
@@ -41,6 +43,8 @@ export default async function Home() {
   const expertiseData = expertise.status === "fulfilled" ? expertise.value : [];
   const servicesData = services.status === "fulfilled" ? services.value : [];
   const clientsData = clients.status === "fulfilled" ? clients.value : [];
+  const testimonialsData =
+    testimonials.status === "fulfilled" ? testimonials.value : [];
 
   return (
     <Suspense fallback={<Loader />}>
@@ -64,7 +68,7 @@ export default async function Home() {
         {clientsData.length ? (
           <>
             <Divider margin />
-            <Clients data={clientsData} />
+            <Clients clients={clientsData} testimonials={testimonialsData} />
             <Divider margin direction="up" />
           </>
         ) : null}
