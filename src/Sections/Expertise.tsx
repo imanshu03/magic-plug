@@ -117,7 +117,7 @@ const Expertise: React.FC<Props> = ({ data }) => {
             ))}
           </div>
         </div>
-        <div className="w-full flex items-center justify-between md:justify-center mt-6 px-[5vw] md:px-0">
+        <div className="w-full flex items-center justify-between md:justify-center mt-6">
           <ArrowButton
             onClick={() => onDotButtonClick(selectedIndex - 1)}
             disabled={selectedIndex === 0}
