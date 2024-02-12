@@ -16,16 +16,12 @@ const RatingStars: FC<Props> = ({ rating, className }) => {
     <div className={clsx("flex items-center justify-start gap-1", className)}>
       {Array.from({ length: 5 }).map((_e, i) => (
         <div className={clsx("w-8 h-8 relative")} key={i}>
-          <RatingIcon
-            className="w-full h-full [&>path]:fill-light-primary/20 relative"
-            key={i}
-          />
+          <RatingIcon className="w-full h-full [&>path]:fill-light-primary/20 relative" />
           <RatingIcon
             className={clsx(
               "absolute top-0 bottom-0 w-full h-full [&>path]:fill-light-primary",
               i + 1 > maxIntRating ? "hidden" : ""
             )}
-            key={i}
             style={{
               clipPath:
                 i + 1 === maxIntRating && floatRating

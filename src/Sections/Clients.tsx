@@ -69,19 +69,22 @@ const Clients: React.FC<Props> = ({ clients, testimonials }) => {
           className="overflow-hidden scrollbar-hide px-[5vw] lg:px-[10vw]"
           ref={emblaRef}
         >
-          <div className="flex -ml-10 touch-pan-y">
+          <div className="flex items-stretch -ml-10 touch-pan-y">
             {testimonials.map(({ name, company, review, rating }, i) => (
               <div
-                className="basis-full md:basis-1/2 shrink-0 grow-0 h-full pl-10"
+                className="basis-full md:basis-1/2 shrink-0 grow-0 h-auto pl-10"
                 key={i}
               >
-                <div className="w-full h-full">
-                  <div className="flex flex-col items-start justify-between w-full h-auto min-h-[400px] bg-theme relative p-4 md:p-6 lg:p-8">
+                <div className="w-full h-full flex flex-col items-stretch justify-start">
+                  <div className="flex flex-col items-start justify-between w-full h-full bg-theme relative p-4 md:p-6 lg:p-8 grow">
                     <QuoteIcon className="w-24 h-24 [&>*]:fill-light-primary/20" />
                     <Description className="text-light-primary">
                       {review}
                     </Description>
-                    <RatingStars rating={rating} className="self-end" />
+                    <RatingStars
+                      rating={rating}
+                      className="self-end mt-2 lg:mt-4"
+                    />
                     <div className="absolute bottom-1 left-5 border-[24px] border-solid border-transparent border-t-theme translate-y-full" />
                   </div>
                   <Description className="text-dark-primary font-semibold !mt-8 flex items-center justify-start gap-2 pl-4 md:pl-0">

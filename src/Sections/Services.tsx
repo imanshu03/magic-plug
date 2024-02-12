@@ -45,7 +45,7 @@ const Services: React.FC<Props> = ({ data }) => {
                     <div className="grow" />
                     <SideArrowIcon className="w-6 h-6 md:w-8 md:h-8 lg:w-12 lg:h-12 shrink-0transition-colors duration-300 ease-in-out group-hover:[&>path]:stroke-light-primary" />
                   </div>
-                  <div className="w-full flex items-center justify-start pl-16 md:pl-24 lg:pl-40 gap-6 max-h-0 overflow-hidden group-hover:lg:max-h-80 transition-all duration-300 ease-in-out">
+                  <div className="w-full flex items-center justify-start pl-16 md:pl-24 lg:pl-40 gap-6 max-h-0 overflow-hidden group-hover:md:max-h-80 transition-all duration-300 ease-in-out">
                     <Description className="text-light-primary grow">
                       {item.description}
                     </Description>
