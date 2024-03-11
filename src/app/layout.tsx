@@ -9,6 +9,7 @@ import { LinkData } from "@/types";
 import { ToastContainer } from "react-toastify";
 
 import "./globals.css";
+import tailwindSSRCss from "!raw-loader!./output.css";
 import "react-toastify/dist/ReactToastify.css";
 
 const manrope = Manrope({
@@ -171,7 +172,7 @@ export default async function RootLayout({
           <style
             id="tailwind-ssr"
             dangerouslySetInnerHTML={{
-              __html: require("!raw-loader!./output.css").default,
+              __html: tailwindSSRCss,
             }}
           ></style>
           <Script src="https://www.googletagmanager.com/gtag/js?id=G-X2L15MZPF3"></Script>

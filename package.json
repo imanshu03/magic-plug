@@ -3,9 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "rm -rf ./src/app/output.css && touch ./src/app/output.css",
     "dev": "next dev",
-    "build:local": "next build",
-    "build": "npx tailwindcss -i ./src/app/globals.css -o ./src/app/output.css && next build",
+    "prebuild": "tailwindcss -i ./src/app/globals.css -o ./src/app/output.css",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
