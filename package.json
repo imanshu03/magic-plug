@@ -1,6 +1,6 @@
 {
   "name": "website",
-  "version": "0.1.1",
+  "version": "1.0.2",
   "private": true,
   "scripts": {
     "predev": "rm -rf ./src/app/output.css && touch ./src/app/output.css",
