@@ -9,7 +9,10 @@ export async function POST(req: NextRequest) {
 
     await MailService.send({
       templateId: process.env.MAIL_TEMPLATE_ID as string,
-      from: process.env.SENDER_MAIL!,
+      from: {
+        email: process.env.SENDER_MAIL!,
+        name: "MagicPlug Tech 🚀",
+      },
       to: contact,
       dynamicTemplateData: {
         clientName: name,
